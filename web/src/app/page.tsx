@@ -1,6 +1,9 @@
-import { AlbumsSection } from "@/components/AlbumsSection";
-import { SongsSection } from "@/components/SongsSection";
 import { Container } from "@mantine/core";
+
+import { AlbumsSection } from "@/components/AlbumsSection";
+import { ArtistsSection } from "@/components/ArtistsSection";
+import { SongsSection } from "@/components/SongsSection";
+import { PlaylistsSection } from "@/components/PlaylistsSection";
 
 export default function Home() {
   return (
@@ -45,6 +48,40 @@ export default function Home() {
           {
             id: "dsgd54gfdg45rg6ygd356578",
             title: "Unbroken"
+          }
+        ]}
+      />
+
+      <ArtistsSection
+        items={[
+          {
+            id: "dsljf9384fkdjg9030jkdv",
+            name: "Demi Lovato"
+          },
+          {
+            id: "4uoigjfi5u4gjh490gh904",
+            name: "Hayley Kiyoko"
+          },
+          {
+            id: "dsgd54gfdg45rg6ygd356578",
+            name: "Marina and the Diamonds"
+          }
+        ]}
+      />
+
+      <PlaylistsSection
+        items={[
+          {
+            id: "dsljf9384fkdjg9030jkdv",
+            title: "Dance Hits"
+          },
+          {
+            id: "4uoigjfi5u4gjh490gh904",
+            title: "Bubble Pop"
+          },
+          {
+            id: "dsgd54gfdg45rg6ygd356578",
+            title: "Cardio Songs"
           }
         ]}
       />

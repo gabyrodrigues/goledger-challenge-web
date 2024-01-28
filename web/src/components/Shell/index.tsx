@@ -27,25 +27,25 @@ export function Shell({ children }: ShellProps) {
 
           <UnstyledButton
             component={Link}
-            href="/"
+            href="/artists"
             className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Artists
           </UnstyledButton>
           <UnstyledButton
             component={Link}
-            href="/"
+            href="/albums"
             className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Albums
           </UnstyledButton>
           <UnstyledButton
             component={Link}
-            href="/"
+            href="/songs"
             className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Songs
           </UnstyledButton>
           <UnstyledButton
             component={Link}
-            href="/"
+            href="/playlists"
             className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Playlists
           </UnstyledButton>
