@@ -1,9 +1,10 @@
 import { SimpleGrid, Stack } from "@mantine/core";
-import { Song, SongProps } from "../Song";
+import { Song } from "../Song";
 import { SectionHeading } from "../SectionHeading";
+import { SongItem } from "@/contexts/SongContext";
 
 interface SongsSectionProps {
-  items: SongProps[];
+  items: SongItem[];
   linkUrl?: string;
 }
 export function SongsSection({ items, linkUrl }: SongsSectionProps) {

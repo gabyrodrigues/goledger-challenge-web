@@ -2,14 +2,9 @@
 import Link from "next/link";
 import { ActionIcon, Flex, Group, Menu, Stack, Text } from "@mantine/core";
 import { IconDotsVertical, IconPlayerPlayFilled } from "@tabler/icons-react";
+import { SongItem } from "@/contexts/SongContext";
 
-export interface SongProps {
-  id: string;
-  title: string;
-  artists: string[];
-}
-
-export function Song({ id, title, artists }: SongProps) {
+export function Song({ id, title, artists }: SongItem) {
   return (
     <Link href={`/songs/${id}`}>
       <Flex className="items-center justify-between p-1 rounded hover:bg-darkGray">
@@ -19,13 +14,7 @@ export function Song({ id, title, artists }: SongProps) {
           </Flex>
           <Stack className="gap-1">
             <Text className="text-xl font-bold text-white line-clamp-1">{title}</Text>
-            {artists.map((artist, index) => (
-              <Text
-                className="text-base text-lightGray line-clamp-1"
-                key={index}>
-                {artist}
-              </Text>
-            ))}
+            <Text className="text-base text-lightGray line-clamp-1">{artists.join(", ")}</Text>
           </Stack>
         </Group>
 

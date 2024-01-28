@@ -1,9 +1,10 @@
 import { SimpleGrid, Stack } from "@mantine/core";
-import { Artist, ArtistProps } from "../Artist";
+import { Artist } from "../Artist";
 import { SectionHeading } from "../SectionHeading";
+import { ArtistItem } from "@/contexts/ArtistContext";
 
 interface ArtistsSectionProps {
-  items: ArtistProps[];
+  items: ArtistItem[];
   linkUrl?: string;
 }
 export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
@@ -14,7 +15,9 @@ export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
         linkUrl={linkUrl}
       />
 
-      <SimpleGrid cols={6}>
+      <SimpleGrid
+        cols={6}
+        className="items-start">
         {items.map((item) => (
           <Artist
             key={item.id}

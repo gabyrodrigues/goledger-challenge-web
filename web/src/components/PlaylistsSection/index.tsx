@@ -1,9 +1,10 @@
 import { SimpleGrid, Stack } from "@mantine/core";
 import { SectionHeading } from "../SectionHeading";
-import { Playlist, PlaylistProps } from "../Playlist";
+import { Playlist } from "../Playlist";
+import { PlaylistItem } from "@/contexts/PlaylistContext";
 
 interface PlaylistsSectionProps {
-  items: PlaylistProps[];
+  items: PlaylistItem[];
   linkUrl?: string;
 }
 export function PlaylistsSection({ items, linkUrl }: PlaylistsSectionProps) {
@@ -14,12 +15,14 @@ export function PlaylistsSection({ items, linkUrl }: PlaylistsSectionProps) {
         linkUrl={linkUrl}
       />
 
-      <SimpleGrid cols={6}>
+      <SimpleGrid
+        cols={6}
+        className="items-start">
         {items.map((item) => (
           <Playlist
             key={item.id}
             id={item.id}
-            title={item.title}
+            name={item.name}
           />
         ))}
       </SimpleGrid>

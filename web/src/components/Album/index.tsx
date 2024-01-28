@@ -2,11 +2,10 @@
 import Link from "next/link";
 import { ActionIcon, Flex, Group, Menu, Text } from "@mantine/core";
 import { IconDotsVertical, IconPlayerPlayFilled } from "@tabler/icons-react";
+import { AlbumItem } from "@/contexts/AlbumContext";
 
-export interface AlbumProps {
-  id: string;
-  title: string;
-}
+interface AlbumProps extends Pick<AlbumItem, "id" | "title"> {}
+
 export function Album({ id, title }: AlbumProps) {
   return (
     <Flex className="justify-between items-center w-min p-1 rounded hover:bg-darkGray">
@@ -40,7 +39,7 @@ export function Album({ id, title }: AlbumProps) {
                 </Menu.Dropdown>
               </Menu>
             </Flex>
-            <Text className="text-xl font-bold text-white line-clamp-1">{title}</Text>
+            <Text className="text-xl font-bold text-white line-clamp-2">{title}</Text>
           </Group>
         </Flex>
       </Link>

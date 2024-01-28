@@ -2,12 +2,11 @@
 import Link from "next/link";
 import { ActionIcon, Flex, Group, Menu, Text } from "@mantine/core";
 import { IconDotsVertical, IconPlayerPlayFilled } from "@tabler/icons-react";
+import { PlaylistItem } from "@/contexts/PlaylistContext";
 
-export interface PlaylistProps {
-  id: string;
-  title: string;
-}
-export function Playlist({ id, title }: PlaylistProps) {
+export interface PlaylistProps extends Pick<PlaylistItem, "id" | "name"> {}
+
+export function Playlist({ id, name }: PlaylistProps) {
   return (
     <Flex className="justify-between items-center w-min p-1 rounded hover:bg-darkGray">
       <Link href={`/playlists/${id}`}>
@@ -40,7 +39,7 @@ export function Playlist({ id, title }: PlaylistProps) {
                 </Menu.Dropdown>
               </Menu>
             </Flex>
-            <Text className="text-xl font-bold text-white line-clamp-1">{title}</Text>
+            <Text className="text-xl font-bold text-white line-clamp-2">{name}</Text>
           </Group>
         </Flex>
       </Link>

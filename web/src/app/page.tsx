@@ -1,89 +1,49 @@
+"use client";
+import { useContext, useEffect } from "react";
+
 import { AlbumsSection } from "@/components/AlbumsSection";
 import { ArtistsSection } from "@/components/ArtistsSection";
 import { SongsSection } from "@/components/SongsSection";
 import { PlaylistsSection } from "@/components/PlaylistsSection";
 
+import { SongContext } from "@/contexts/SongContext";
+import { AlbumContext } from "@/contexts/AlbumContext";
+import { ArtistContext } from "@/contexts/ArtistContext";
+import { PlaylistContext } from "@/contexts/PlaylistContext";
+
 export default function Home() {
+  const { songs, fetchFirstSongs } = useContext(SongContext);
+  const { albums, fetchFirstAlbums } = useContext(AlbumContext);
+  const { artists, fetchFirstArtists } = useContext(ArtistContext);
+  const { playlists, fetchFirstPlaylists } = useContext(PlaylistContext);
+
+  useEffect(() => {
+    fetchFirstSongs();
+    fetchFirstAlbums();
+    fetchFirstArtists();
+    fetchFirstPlaylists();
+  }, [fetchFirstAlbums, fetchFirstArtists, fetchFirstPlaylists, fetchFirstSongs]);
+
   return (
     <>
       <SongsSection
         linkUrl="/songs"
-        items={[
-          {
-            id: "dsljf9384fkdjg9030jkdv",
-            title: "Sorry Not Sorry",
-            artists: ["Demi Lovato"]
-          },
-          {
-            id: "4uoigjfi5u4gjh490gh904",
-            title: "Don't Forget",
-            artists: ["Demi Lovato"]
-          },
-          {
-            id: "dsgd54gfdg45rg6ygd356578",
-            title: "Only Forever",
-            artists: ["Demi Lovato"]
-          },
-          {
-            id: "fgfh4656vvg45656vgfg5",
-            title: "The Art Of Starting Over",
-            artists: ["Demi Lovato"]
-          }
-        ]}
+        items={songs}
       />
 
       <AlbumsSection
         linkUrl="/albums"
-        items={[
-          {
-            id: "dsljf9384fkdjg9030jkdv",
-            title: "Don't Forget"
-          },
-          {
-            id: "4uoigjfi5u4gjh490gh904",
-            title: "Tell Me You Love Me"
-          },
-          {
-            id: "dsgd54gfdg45rg6ygd356578",
-            title: "Unbroken"
-          }
-        ]}
+        items={albums}
       />
 
       <ArtistsSection
         linkUrl="/artists"
-        items={[
-          {
-            id: "dsljf9384fkdjg9030jkdv",
-            name: "Demi Lovato"
-          },
-          {
-            id: "4uoigjfi5u4gjh490gh904",
-            name: "Hayley Kiyoko"
-          },
-          {
-            id: "dsgd54gfdg45rg6ygd356578",
-            name: "Marina and the Diamonds"
-          }
-        ]}
+        items={artists}
       />
 
       <PlaylistsSection
         linkUrl="/playlists"
-        items={[
-          {
-            id: "dsljf9384fkdjg9030jkdv",
-            title: "Dance Hits"
-          },
-          {
-            id: "4uoigjfi5u4gjh490gh904",
-            title: "Bubble Pop"
-          },
-          {
-            id: "dsgd54gfdg45rg6ygd356578",
-            title: "Cardio Songs"
-          }
-        ]}
+        items={playlists}
       />
     </>
   );
