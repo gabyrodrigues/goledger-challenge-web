@@ -10,7 +10,7 @@ export interface AlbumProps {
 export function Album({ id, title }: AlbumProps) {
   return (
     <Flex className="justify-between items-center w-min p-1 rounded hover:bg-darkGray">
-      <Link href={`/album/${id}`}>
+      <Link href={`/albums/${id}`}>
         <Flex className="items-center">
           <Group>
             <Flex className="bg-gray text-white w-40 h-40 justify-center items-center relative">

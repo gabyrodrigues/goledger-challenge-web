@@ -4,13 +4,14 @@ import { SectionHeading } from "../SectionHeading";
 
 interface SongsSectionProps {
   items: SongProps[];
+  linkUrl?: string;
 }
-export function SongsSection({ items }: SongsSectionProps) {
+export function SongsSection({ items, linkUrl }: SongsSectionProps) {
   return (
     <Stack className="flex gap-8">
       <SectionHeading
         title="Songs"
-        linkUrl="/songs"
+        linkUrl={linkUrl}
       />
 
       <SimpleGrid cols={3}>
@@ -19,7 +20,7 @@ export function SongsSection({ items }: SongsSectionProps) {
             key={item.id}
             id={item.id}
             title={item.title}
-            artist={item.artist}
+            artists={item.artists}
           />
         ))}
       </SimpleGrid>

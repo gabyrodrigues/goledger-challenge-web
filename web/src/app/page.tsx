@@ -1,5 +1,3 @@
-import { Container } from "@mantine/core";
-
 import { AlbumsSection } from "@/components/AlbumsSection";
 import { ArtistsSection } from "@/components/ArtistsSection";
 import { SongsSection } from "@/components/SongsSection";
@@ -7,35 +5,35 @@ import { PlaylistsSection } from "@/components/PlaylistsSection";
 
 export default function Home() {
   return (
-    <Container
-      size="lg"
-      className="flex flex-col px-10 py-16 gap-8">
+    <>
       <SongsSection
+        linkUrl="/songs"
         items={[
           {
             id: "dsljf9384fkdjg9030jkdv",
             title: "Sorry Not Sorry",
-            artist: "Demi Lovato"
+            artists: ["Demi Lovato"]
           },
           {
             id: "4uoigjfi5u4gjh490gh904",
             title: "Don't Forget",
-            artist: "Demi Lovato"
+            artists: ["Demi Lovato"]
           },
           {
             id: "dsgd54gfdg45rg6ygd356578",
             title: "Only Forever",
-            artist: "Demi Lovato"
+            artists: ["Demi Lovato"]
           },
           {
             id: "fgfh4656vvg45656vgfg5",
             title: "The Art Of Starting Over",
-            artist: "Demi Lovato"
+            artists: ["Demi Lovato"]
           }
         ]}
       />
 
       <AlbumsSection
+        linkUrl="/albums"
         items={[
           {
             id: "dsljf9384fkdjg9030jkdv",
@@ -53,6 +51,7 @@ export default function Home() {
       />
 
       <ArtistsSection
+        linkUrl="/artists"
         items={[
           {
             id: "dsljf9384fkdjg9030jkdv",
@@ -70,6 +69,7 @@ export default function Home() {
       />
 
       <PlaylistsSection
+        linkUrl="/playlists"
         items={[
           {
             id: "dsljf9384fkdjg9030jkdv",
@@ -85,6 +85,6 @@ export default function Home() {
           }
         ]}
       />
-    </Container>
+    </>
   );
 }

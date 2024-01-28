@@ -4,13 +4,14 @@ import { SectionHeading } from "../SectionHeading";
 
 interface AlbumsSectionProps {
   items: AlbumProps[];
+  linkUrl?: string;
 }
-export function AlbumsSection({ items }: AlbumsSectionProps) {
+export function AlbumsSection({ items, linkUrl }: AlbumsSectionProps) {
   return (
     <Stack className="flex gap-8">
       <SectionHeading
         title="Albums"
-        linkUrl="/albums"
+        linkUrl={linkUrl}
       />
 
       <SimpleGrid cols={6}>
