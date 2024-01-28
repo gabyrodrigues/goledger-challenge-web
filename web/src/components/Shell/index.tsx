@@ -17,34 +17,36 @@ export function Shell({ children }: ShellProps) {
       padding="md">
       <AppShell.Navbar className="bg-darkGray border-0 py-6 px-10">
         <Stack className="gap-5">
-          <Image
-            src={logo}
-            alt="Logo Music Studio"
-            className="w-28"
-          />
+          <Link href="/">
+            <Image
+              src={logo}
+              alt="Logo Music Studio"
+              className="w-28"
+            />
+          </Link>
 
           <UnstyledButton
             component={Link}
             href="/"
-            className="text-base text-white font-bold">
+            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Artists
           </UnstyledButton>
           <UnstyledButton
             component={Link}
             href="/"
-            className="text-base text-white font-bold">
+            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Albums
           </UnstyledButton>
           <UnstyledButton
             component={Link}
             href="/"
-            className="text-base text-white font-bold">
+            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Songs
           </UnstyledButton>
           <UnstyledButton
             component={Link}
             href="/"
-            className="text-base text-white font-bold">
+            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
             Playlists
           </UnstyledButton>
 
