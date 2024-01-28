@@ -18,7 +18,9 @@ export function Artist({ id, name }: ArtistProps) {
 
               <Menu width={200}>
                 <Menu.Target>
-                  <ActionIcon className="rounded-full p-3 hover:bg-lightGray hover:bg-opacity-50 absolute right-2 top-1/2">
+                  <ActionIcon
+                    className="rounded-full p-3 hover:bg-lightGray hover:bg-opacity-50 absolute right-2 top-1/2"
+                    onClick={(e) => e.preventDefault()}>
                     <IconDotsVertical size={24} />
                   </ActionIcon>
                 </Menu.Target>
