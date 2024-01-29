@@ -21,6 +21,7 @@ export function SongsSection({ items, linkUrl }: SongsSectionProps) {
             key={item.id}
             id={item.id}
             title={item.title}
+            explicit={item.explicit}
             artists={item.artists}
           />
         ))}
