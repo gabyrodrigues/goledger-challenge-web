@@ -3,6 +3,7 @@ import { createContext } from "react";
 interface ArtistProps {
   artists: ArtistItem[];
   fetchFirstArtists: () => Promise<void>;
+  fetchAllArtists: () => Promise<void>;
 }
 
 export interface ArtistItem {

@@ -3,6 +3,7 @@ import { createContext } from "react";
 interface AlbumProps {
   albums: AlbumItem[];
   fetchFirstAlbums: () => Promise<void>;
+  fetchAllAlbums: () => Promise<void>;
 }
 
 export interface AlbumItem {

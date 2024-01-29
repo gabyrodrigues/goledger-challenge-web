@@ -3,6 +3,7 @@ import { createContext } from "react";
 interface PlaylistProps {
   playlists: PlaylistItem[];
   fetchFirstPlaylists: () => Promise<void>;
+  fetchAllPlaylists: () => Promise<void>;
 }
 
 export interface PlaylistItem {

@@ -12,6 +12,32 @@ interface SongContextProviderProps {
 export default function SongContextProvider(props: SongContextProviderProps) {
   const [songs, setSongs] = useState<SongItem[]>([]);
 
+  async function handleSongsWithArtist(songsData: Song[]): Promise<SongItem[]> {
+    const songsWithArtists = await Promise.all(
+      songsData.map(async (song: Song) => {
+        const artistKeys = song.artists.map((artist) => artist["@key"]);
+        const artistResponse = await api.post("query/search", {
+          query: {
+            selector: {
+              "@assetType": "artist",
+              "@key": { $in: artistKeys }
+            },
+            fields: ["name"]
+          }
+        });
+        const artistNames = artistResponse.data.result.map(({ name }: { name: string }) => name);
+
+        return {
+          id: song["@key"],
+          title: song.title,
+          artists: artistNames
+        };
+      })
+    );
+
+    return songsWithArtists;
+  }
+
   const fetchFirstSongs = useCallback(async () => {
     try {
       const response = await api.post("query/search", {
@@ -25,27 +51,25 @@ export default function SongContextProvider(props: SongContextProviderProps) {
       });
       const songsData = response.data.result;
 
-      const songsWithArtists = await Promise.all(
-        songsData.map(async (song: Song) => {
-          const artistKeys = song.artists.map((artist) => artist["@key"]);
-          const artistResponse = await api.post("query/search", {
-            query: {
-              selector: {
-                "@assetType": "artist",
-                "@key": { $in: artistKeys }
-              },
-              fields: ["name"]
-            }
-          });
-          const artistNames = artistResponse.data.result.map(({ name }: { name: string }) => name);
+      const songsWithArtists = await handleSongsWithArtist(songsData);
+      setSongs(songsWithArtists);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
-          return {
-            id: song["@key"],
-            title: song.title,
-            artists: artistNames
-          };
-        })
-      );
+  const fetchAllSongs = useCallback(async () => {
+    try {
+      const response = await api.post("query/search", {
+        query: {
+          selector: {
+            "@assetType": "song"
+          },
+          fields: ["@key", "title", "artists"]
+        }
+      });
+      const songsData = response.data.result;
+      const songsWithArtists = await handleSongsWithArtist(songsData);
       setSongs(songsWithArtists);
     } catch (error) {
       console.error(error);
@@ -54,7 +78,8 @@ export default function SongContextProvider(props: SongContextProviderProps) {
 
   const values = {
     songs,
-    fetchFirstSongs
+    fetchFirstSongs,
+    fetchAllSongs
   };
 
   return <SongContext.Provider value={values}>{props.children}</SongContext.Provider>;

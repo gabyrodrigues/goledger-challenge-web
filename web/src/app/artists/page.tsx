@@ -1,22 +1,15 @@
+"use client";
+import { useContext, useEffect } from "react";
+
 import { ArtistsSection } from "@/components/ArtistsSection";
+import { ArtistContext } from "@/contexts/ArtistContext";
 
 export default function Artists() {
-  return (
-    <ArtistsSection
-      items={[
-        {
-          id: "dsljf9384fkdjg9030jkdv",
-          name: "Demi Lovato"
-        },
-        {
-          id: "4uoigjfi5u4gjh490gh904",
-          name: "Hayley Kiyoko"
-        },
-        {
-          id: "dsgd54gfdg45rg6ygd356578",
-          name: "Marina and the Diamonds"
-        }
-      ]}
-    />
-  );
+  const { artists, fetchAllArtists } = useContext(ArtistContext);
+
+  useEffect(() => {
+    fetchAllArtists();
+  }, [fetchAllArtists]);
+
+  return <ArtistsSection items={artists} />;
 }

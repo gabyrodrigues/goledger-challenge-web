@@ -1,3 +1,4 @@
+"use client";
 import { Stack } from "@mantine/core";
 
 import { InfoCard } from "@/components/InfoCard";
