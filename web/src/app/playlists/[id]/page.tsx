@@ -1,50 +1,36 @@
 "use client";
+import { useContext, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { Stack } from "@mantine/core";
 
 import { InfoCard } from "@/components/InfoCard";
 import { Song } from "@/components/Song";
+import { PlaylistContext, PlaylistItem } from "@/contexts/PlaylistContext";
 
 export default function PlaylistId() {
-  const songs = [
-    {
-      id: "dsljf9384fkdjg9030jkdv",
-      title: "Sorry Not Sorry",
-      artists: ["Demi Lovato"]
-    },
-    {
-      id: "4uoigjfi5u4gjh490gh904",
-      title: "Don't Forget",
-      artists: ["Demi Lovato"]
-    },
-    {
-      id: "dsgd54gfdg45rg6ygd356578",
-      title: "Only Forever",
-      artists: ["Demi Lovato"]
-    },
-    {
-      id: "fgfh4656vvg45656vgfg5",
-      title: "The Art Of Starting Over",
-      artists: ["Demi Lovato"]
-    }
-  ];
+  const { id } = useParams();
+  const { playlist, fetchPlaylistById } = useContext(PlaylistContext);
+  const playlistId = decodeURIComponent(String(id));
+
+  useEffect(() => {
+    fetchPlaylistById(playlistId);
+  }, [fetchPlaylistById, playlistId]);
 
   return (
     <Stack className="gap-8">
       <InfoCard
         type="playlist"
-        playlist={{
-          name: "Bubble Pop",
-          description: "The greatest pop hits to listen anywhere and anytime."
-        }}
+        playlist={playlist as PlaylistItem}
       />
 
       <Stack className="gap-2">
-        {songs.map((song) => (
+        {playlist?.songs.map((song) => (
           <Song
             key={song.id}
             id={song.id}
             title={song.title}
-            artists={["Demi Lovato"]}
+            explicit={song.explicit}
+            artists={song.artists}
           />
         ))}
       </Stack>

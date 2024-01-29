@@ -6,7 +6,9 @@ export interface IdRef {
 export interface Song {
   "@key": string;
   title: string;
+  explicit: boolean;
   artists: IdRef[];
+  album: IdRef;
 }
 
 export interface Album {
@@ -15,6 +17,7 @@ export interface Album {
   artist: IdRef;
   rating: number;
   releaseDate: string;
+  songs: IdRef[];
 }
 
 export interface Artist {

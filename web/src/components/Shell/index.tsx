@@ -22,6 +22,7 @@ export function Shell({ children }: ShellProps) {
               src={logo}
               alt="Logo Music Studio"
               className="w-28"
+              priority
             />
           </Link>
 

@@ -53,20 +53,10 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
             <Stack className="gap-2">
               <Text className="text-3xl font-bold text-white">{song?.title}</Text>
               <Group className="gap-1 items-center">
-                {song?.explicit && (
-                  <>
-                    <IconExplicit size={20} />•
-                  </>
-                )}
+                {song?.explicit && <IconExplicit size={20} />}
                 <Text className="text-base text-lightGray">Song</Text>•
-                {song?.artists.map((artist, index) => (
-                  <Text
-                    className="text-base text-lightGray"
-                    key={index}>
-                    {artist}
-                  </Text>
-                ))}{" "}
-                •<Text className="text-base text-lightGray">{song?.album}</Text>
+                <Text className="text-base text-lightGray">{song?.artists.join(", ")}</Text> •
+                <Text className="text-base text-lightGray">{song?.album}</Text>
               </Group>
             </Stack>
             <Menu width={200}>
