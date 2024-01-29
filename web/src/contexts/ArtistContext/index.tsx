@@ -10,6 +10,7 @@ interface ArtistProps {
   fetchFirstArtists: () => Promise<void>;
   fetchAllArtists: () => Promise<void>;
   fetchArtistById: (artistId: string) => Promise<void>;
+  handleDeleteArtist: (artistId: string) => Promise<void>;
 }
 
 export interface ArtistItem {

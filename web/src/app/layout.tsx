@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import "./globals.css";
 
 import { ColorSchemeScript, Container, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+
 import { Shell } from "@/components/Shell";
 import { cn } from "@/utils";
 import { AppContexts } from "@/contexts/AppContexts";
@@ -30,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={cn("bg-background text-white", inter.className)}>
         <MantineProvider defaultColorScheme="dark">
+          <Notifications />
           <AppContexts>
             <Shell>
               <Container

@@ -5,6 +5,7 @@ import { AlbumContext, AlbumItem } from ".";
 import api from "@/services/api";
 import { Album, Artist, Song } from "@/utils/data";
 import { SongItem } from "../SongContext";
+import { notifications } from "@mantine/notifications";
 
 interface AlbumContextProviderProps {
   children: React.ReactNode;
@@ -177,6 +178,34 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
     [handleAlbumSongs]
   );
 
+  async function handleDeleteAlbum(albumId: string) {
+    console.log("delete", albumId);
+    try {
+      await api.post("invoke/deleteAsset", {
+        key: {
+          "@assetType": "album",
+          "@key": albumId
+        }
+      });
+
+      const filteredList = albums.filter((album) => album.id !== albumId);
+      setAlbums(filteredList);
+
+      notifications.show({
+        autoClose: 3000,
+        message: "Album deleted!",
+        color: "green"
+      });
+    } catch (error) {
+      console.error(error);
+      notifications.show({
+        autoClose: 3000,
+        message: "Album not deleted! Please try again.",
+        color: "red"
+      });
+    }
+  }
+
   const values = {
     albums,
     album,
@@ -184,7 +213,8 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
     fetchFirstAlbums,
     fetchAllAlbums,
     fetchAlbumById,
-    fetchArtistNames
+    fetchArtistNames,
+    handleDeleteAlbum
   };
 
   return <AlbumContext.Provider value={values}>{props.children}</AlbumContext.Provider>;

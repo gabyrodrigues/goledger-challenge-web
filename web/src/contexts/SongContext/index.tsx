@@ -6,6 +6,7 @@ interface SongProps {
   fetchFirstSongs: () => Promise<void>;
   fetchAllSongs: () => Promise<void>;
   fetchSongById: (songId: string) => Promise<void>;
+  handleDeleteSong: (songId: string) => Promise<void>;
 }
 
 export interface SongItem {

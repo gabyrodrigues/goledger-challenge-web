@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
+import { notifications } from "@mantine/notifications";
 
 import { SongContext, SongItem } from ".";
 import { Song } from "@/utils/data";
@@ -111,12 +112,41 @@ export default function SongContextProvider(props: SongContextProviderProps) {
     }
   }, []);
 
+  async function handleDeleteSong(songId: string) {
+    console.log("delete", songId);
+    try {
+      await api.post("invoke/deleteAsset", {
+        key: {
+          "@assetType": "song",
+          "@key": songId
+        }
+      });
+
+      const filteredList = songs.filter((song) => song.id !== songId);
+      setSongs(filteredList);
+
+      notifications.show({
+        autoClose: 3000,
+        message: "Song deleted!",
+        color: "green"
+      });
+    } catch (error) {
+      console.error(error);
+      notifications.show({
+        autoClose: 3000,
+        message: "Song not deleted! Please try again.",
+        color: "red"
+      });
+    }
+  }
+
   const values = {
     songs,
     song,
     fetchFirstSongs,
     fetchAllSongs,
-    fetchSongById
+    fetchSongById,
+    handleDeleteSong
   };
 
   return <SongContext.Provider value={values}>{props.children}</SongContext.Provider>;

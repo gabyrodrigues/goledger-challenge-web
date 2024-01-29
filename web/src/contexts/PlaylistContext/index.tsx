@@ -7,6 +7,7 @@ interface PlaylistProps {
   fetchFirstPlaylists: () => Promise<void>;
   fetchAllPlaylists: () => Promise<void>;
   fetchPlaylistById: (playlistId: string) => Promise<void>;
+  handleDeletePlaylist: (playlistId: string) => Promise<void>;
 }
 
 export interface PlaylistItem {

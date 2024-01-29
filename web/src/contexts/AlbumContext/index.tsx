@@ -9,6 +9,7 @@ interface AlbumProps {
   fetchAllAlbums: () => Promise<void>;
   fetchAlbumById: (albumId: string) => Promise<AlbumItem | null>;
   fetchArtistNames: (artistKeys: string[]) => Promise<string[]>;
+  handleDeleteAlbum: (albumId: string) => Promise<void>;
 }
 
 export interface AlbumItem {

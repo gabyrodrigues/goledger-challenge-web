@@ -1,9 +1,10 @@
 "use client";
 import { useCallback, useContext, useState } from "react";
+import { notifications } from "@mantine/notifications";
 
 import api from "@/services/api";
-import { ArtistContext, ArtistItem } from ".";
 import { Album, Artist, Song } from "@/utils/data";
+import { ArtistContext, ArtistItem } from ".";
 import { SongItem } from "../SongContext";
 import { AlbumContext, AlbumItem } from "../AlbumContext";
 
@@ -172,6 +173,34 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
     [handleArtistAlbums, handleArtistSongs]
   );
 
+  async function handleDeleteArtist(artistId: string) {
+    console.log("delete", artistId);
+    try {
+      await api.post("invoke/deleteAsset", {
+        key: {
+          "@assetType": "artist",
+          "@key": artistId
+        }
+      });
+
+      const filteredList = artists.filter((artist) => artist.id !== artistId);
+      setArtists(filteredList);
+
+      notifications.show({
+        autoClose: 3000,
+        message: "Artist deleted!",
+        color: "green"
+      });
+    } catch (error) {
+      console.error(error);
+      notifications.show({
+        autoClose: 3000,
+        message: "Artist not deleted! Please try again.",
+        color: "red"
+      });
+    }
+  }
+
   const values = {
     artists,
     artist,
@@ -179,7 +208,8 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
     artistAlbums,
     fetchFirstArtists,
     fetchAllArtists,
-    fetchArtistById
+    fetchArtistById,
+    handleDeleteArtist
   };
 
   return <ArtistContext.Provider value={values}>{props.children}</ArtistContext.Provider>;
