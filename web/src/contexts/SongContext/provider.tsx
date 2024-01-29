@@ -60,7 +60,7 @@ export default function SongContextProvider(props: SongContextProviderProps) {
             "@assetType": "song"
           },
           fields: ["@key", "title", "artists", "explicit", "album"],
-          limit: 9
+          limit: 6
         }
       });
       const songsData = response.data.result;

@@ -42,6 +42,19 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
     return albumsWithArtists;
   }
 
+  async function handleAlbumsData(albumsData: Album[]): Promise<AlbumItem[]> {
+    const albums = albumsData.map((album: Album) => {
+      return {
+        id: album["@key"],
+        title: album.title,
+        artist: album.artist["@key"],
+        rating: album.rating,
+        releaseDate: album.releaseDate
+      };
+    });
+    return albums;
+  }
+
   const fetchArtistNames = useCallback(async (artistKeys: string[]) => {
     const artistResponse = await api.post("query/search", {
       query: {
@@ -108,8 +121,8 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
       });
 
       const albumsData = response.data.result;
-      const albumsWithArtists = await handleAlbumsWithArtists(albumsData);
-      setAlbums(albumsWithArtists);
+      const albums = await handleAlbumsData(albumsData);
+      setAlbums(albums);
     } catch (error) {
       console.error(error);
     }
@@ -127,8 +140,8 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
       });
 
       const albumsData = response.data.result;
-      const albumsWithArtists = await handleAlbumsWithArtists(albumsData);
-      setAlbums(albumsWithArtists);
+      const albums = await handleAlbumsData(albumsData);
+      setAlbums(albums);
     } catch (error) {
       console.error(error);
     }
