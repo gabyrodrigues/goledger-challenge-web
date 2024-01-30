@@ -9,7 +9,9 @@ interface PlaylistsSectionProps {
 }
 export function PlaylistsSection({ items, linkUrl }: PlaylistsSectionProps) {
   return (
-    <Stack className="flex gap-8">
+    <Stack
+      display="flex"
+      gap={32}>
       <SectionHeading
         title="Playlists"
         linkUrl={linkUrl}
@@ -17,7 +19,7 @@ export function PlaylistsSection({ items, linkUrl }: PlaylistsSectionProps) {
 
       <SimpleGrid
         cols={6}
-        className="items-start">
+        classNames={{ root: "items-start" }}>
         {items.map((item) => (
           <Playlist
             key={item.id}

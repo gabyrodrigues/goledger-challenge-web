@@ -11,12 +11,19 @@ export function ActionsMenu() {
         <Button
           variant="outline"
           leftSection={<IconPlus size={24} />}
-          className="text-primary font-bold text-base rounded border-lightGray hover:bg-primary hover:text-white hover:border-primary">
+          radius="md"
+          fw="bold"
+          classNames={{
+            root: "text-primary border-lightGray hover:bg-primary hover:text-white hover:border-primary"
+          }}>
           Create
         </Button>
       </Menu.Target>
 
-      <Menu.Dropdown className="bg-darkGray text-white">
+      <Menu.Dropdown
+        classNames={{
+          dropdown: "bg-darkGray text-white"
+        }}>
         <Menu.Item
           component={Link}
           href="/">

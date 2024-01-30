@@ -16,23 +16,47 @@ export function Album({ id, title }: AlbumProps) {
 
   return (
     <>
-      <Flex className="justify-between items-center w-min p-1 rounded hover:bg-darkGray">
+      <Flex
+        p={1}
+        align="center"
+        justify="space-between"
+        classNames={{
+          root: "w-min p-1 hover:bg-darkGray"
+        }}>
         <Link href={`/albums/${id}`}>
-          <Flex className="items-center">
+          <Flex align="center">
             <Group>
-              <Flex className="bg-gray text-white w-40 h-40 justify-center items-center relative">
+              <Flex
+                align="center"
+                justify="center"
+                w={160}
+                h={160}
+                pos="relative"
+                classNames={{
+                  root: "bg-gray text-white"
+                }}>
                 <IconPlayerPlayFilled size={64} />
 
                 <Menu width={200}>
                   <Menu.Target>
                     <ActionIcon
-                      className="rounded-full p-3 hover:bg-lightGray hover:bg-opacity-50 absolute right-2 top-2"
+                      radius="xl"
+                      p={3}
+                      pos="absolute"
+                      right={2}
+                      top={2}
+                      classNames={{
+                        root: "bg-transparent hover:bg-lightGray hover:bg-opacity-50"
+                      }}
                       onClick={(e) => e.preventDefault()}>
                       <IconDotsVertical size={24} />
                     </ActionIcon>
                   </Menu.Target>
 
-                  <Menu.Dropdown className="bg-darkGray text-white">
+                  <Menu.Dropdown
+                    classNames={{
+                      dropdown: "bg-darkGray text-white"
+                    }}>
                     <Menu.Item
                       component={Link}
                       href="/">
@@ -43,13 +67,20 @@ export function Album({ id, title }: AlbumProps) {
                         e.preventDefault();
                         open();
                       }}
-                      className="text-red-400 hover:bg-neutral-700">
+                      classNames={{
+                        item: "text-red-400 hover:bg-neutral-700"
+                      }}>
                       Delete Album
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
               </Flex>
-              <Text className="text-xl font-bold text-white line-clamp-2">{title}</Text>
+              <Text
+                classNames={{
+                  root: "text-xl font-bold text-white line-clamp-2"
+                }}>
+                {title}
+              </Text>
             </Group>
           </Flex>
         </Link>

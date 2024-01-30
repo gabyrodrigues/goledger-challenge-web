@@ -18,7 +18,7 @@ export default function ArtistId() {
   }, [fetchArtistById, artistId]);
 
   return (
-    <Stack className="gap-8">
+    <Stack gap={32}>
       <InfoCard
         type="artist"
         artist={artist as ArtistItem}

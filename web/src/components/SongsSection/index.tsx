@@ -10,7 +10,9 @@ interface SongsSectionProps {
 }
 export function SongsSection({ items, linkUrl }: SongsSectionProps) {
   return (
-    <Stack className="flex gap-8">
+    <Stack
+      display="flex"
+      gap={32}>
       <SectionHeading
         title="Songs"
         linkUrl={linkUrl}

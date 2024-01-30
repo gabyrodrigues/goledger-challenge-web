@@ -9,7 +9,7 @@ interface ArtistsSectionProps {
 }
 export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
   return (
-    <Stack className="flex gap-8">
+    <Stack gap={32}>
       <SectionHeading
         title="Artists"
         linkUrl={linkUrl}
@@ -17,7 +17,9 @@ export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
 
       <SimpleGrid
         cols={6}
-        className="items-start">
+        classNames={{
+          root: "items-start"
+        }}>
         {items.map((item) => (
           <Artist
             key={item.id}

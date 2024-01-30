@@ -17,13 +17,13 @@ export default function PlaylistId() {
   }, [fetchPlaylistById, playlistId]);
 
   return (
-    <Stack className="gap-8">
+    <Stack gap={32}>
       <InfoCard
         type="playlist"
         playlist={playlist as PlaylistItem}
       />
 
-      <Stack className="gap-2">
+      <Stack gap={8}>
         {playlist?.songs.length ? (
           playlist?.songs.map((song) => (
             <Song
@@ -35,7 +35,12 @@ export default function PlaylistId() {
             />
           ))
         ) : (
-          <Text className="text-center text-lightGray italic">
+          <Text
+            fs="italic"
+            ta="center"
+            classNames={{
+              root: "text-lightGray"
+            }}>
             No songs to display. Update the playlist to add songs.
           </Text>
         )}

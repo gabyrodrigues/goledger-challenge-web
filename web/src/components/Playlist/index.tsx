@@ -16,23 +16,41 @@ export function Playlist({ id, name }: PlaylistProps) {
 
   return (
     <>
-      <Flex className="justify-between items-center w-min p-1 rounded hover:bg-darkGray">
+      <Flex
+        justify="space-between"
+        align="center"
+        p={1}
+        classNames={{ root: "w-min rounded hover:bg-darkGray" }}>
         <Link href={`/playlists/${id}`}>
-          <Flex className="items-center">
+          <Flex align="center">
             <Group>
-              <Flex className="bg-gray text-white w-40 h-40 justify-center items-center relative">
+              <Flex
+                justify="center"
+                pos="relative"
+                w={160}
+                h={160}
+                align="center"
+                classNames={{ root: "bg-gray text-white" }}>
                 <IconPlayerPlayFilled size={64} />
 
                 <Menu width={200}>
                   <Menu.Target>
                     <ActionIcon
-                      className="rounded-full p-3 hover:bg-lightGray hover:bg-opacity-50 absolute right-2 top-2"
+                      radius="xl"
+                      p={3}
+                      pos="absolute"
+                      right={2}
+                      top={2}
+                      classNames={{ root: "bg-transparent hover:bg-lightGray hover:bg-opacity-50" }}
                       onClick={(e) => e.preventDefault()}>
                       <IconDotsVertical size={24} />
                     </ActionIcon>
                   </Menu.Target>
 
-                  <Menu.Dropdown className="bg-darkGray text-white">
+                  <Menu.Dropdown
+                    classNames={{
+                      dropdown: "bg-darkGray text-white"
+                    }}>
                     <Menu.Item
                       component={Link}
                       href="/">
@@ -43,13 +61,20 @@ export function Playlist({ id, name }: PlaylistProps) {
                         e.preventDefault();
                         open();
                       }}
-                      className="text-red-400 hover:bg-neutral-700">
+                      classNames={{
+                        item: "text-red-400 hover:bg-neutral-700"
+                      }}>
                       Delete Playlist
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
               </Flex>
-              <Text className="text-xl font-bold text-white line-clamp-2">{name}</Text>
+              <Text
+                fz="xl"
+                fw="bold"
+                classNames={{ root: "text-white line-clamp-2" }}>
+                {name}
+              </Text>
             </Group>
           </Flex>
         </Link>

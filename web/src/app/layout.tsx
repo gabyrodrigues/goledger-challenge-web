@@ -38,7 +38,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Shell>
               <Container
                 size="lg"
-                className="flex flex-col px-10 py-16 gap-8">
+                px={40}
+                py={64}
+                display="flex"
+                classNames={{
+                  root: "flex-col gap-8"
+                }}>
                 {children}
               </Container>
             </Shell>

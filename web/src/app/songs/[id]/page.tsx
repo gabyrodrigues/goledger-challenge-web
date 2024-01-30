@@ -16,7 +16,7 @@ export default function SongId() {
   }, [fetchSongById, songId]);
 
   return (
-    <Stack className="gap-8">
+    <Stack gap={32}>
       <InfoCard
         type="song"
         song={song as SongItem}

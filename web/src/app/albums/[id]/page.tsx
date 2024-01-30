@@ -17,13 +17,13 @@ export default function AlbumId() {
   }, [fetchAlbumById, albumId]);
 
   return (
-    <Stack className="gap-8">
+    <Stack gap={32}>
       <InfoCard
         type="album"
         album={album as AlbumItem}
       />
 
-      <Stack className="gap-2">
+      <Stack gap={8}>
         {albumSongs.map((song) => (
           <Song
             key={song.id}

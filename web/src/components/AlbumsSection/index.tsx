@@ -9,7 +9,7 @@ interface AlbumsSectionProps {
 }
 export function AlbumsSection({ items, linkUrl }: AlbumsSectionProps) {
   return (
-    <Stack className="flex gap-8">
+    <Stack gap={32}>
       <SectionHeading
         title="Albums"
         linkUrl={linkUrl}
@@ -17,7 +17,9 @@ export function AlbumsSection({ items, linkUrl }: AlbumsSectionProps) {
 
       <SimpleGrid
         cols={6}
-        className="items-start">
+        classNames={{
+          root: "items-start"
+        }}>
         {items.map((item) => (
           <Album
             key={item.id}

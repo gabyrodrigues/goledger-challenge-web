@@ -15,8 +15,12 @@ export function Shell({ children }: ShellProps) {
     <AppShell
       navbar={{ width: 210, breakpoint: "sm" }}
       padding="md">
-      <AppShell.Navbar className="bg-darkGray border-0 py-6 px-10">
-        <Stack className="gap-5">
+      <AppShell.Navbar
+        withBorder={false}
+        px={40}
+        py={24}
+        classNames={{ navbar: "bg-darkGray" }}>
+        <Stack gap={20}>
           <Link href="/">
             <Image
               src={logo}
@@ -29,25 +33,33 @@ export function Shell({ children }: ShellProps) {
           <UnstyledButton
             component={Link}
             href="/artists"
-            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
+            fw="bold"
+            p={4}
+            classNames={{ root: "text-white rounded hover:bg-gray" }}>
             Artists
           </UnstyledButton>
           <UnstyledButton
             component={Link}
             href="/albums"
-            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
+            fw="bold"
+            p={4}
+            classNames={{ root: "text-white rounded hover:bg-gray" }}>
             Albums
           </UnstyledButton>
           <UnstyledButton
             component={Link}
             href="/songs"
-            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
+            fw="bold"
+            p={4}
+            classNames={{ root: "text-white rounded hover:bg-gray" }}>
             Songs
           </UnstyledButton>
           <UnstyledButton
             component={Link}
             href="/playlists"
-            className="text-base text-white font-bold p-1 rounded hover:bg-gray">
+            fw="bold"
+            p={4}
+            classNames={{ root: "text-white rounded hover:bg-gray" }}>
             Playlists
           </UnstyledButton>
 

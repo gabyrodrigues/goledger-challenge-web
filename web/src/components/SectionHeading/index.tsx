@@ -7,14 +7,22 @@ interface SectionHeadingProps {
 }
 export function SectionHeading({ title, linkUrl }: SectionHeadingProps) {
   return (
-    <Flex className="justify-between">
-      <Text className="text-4xl font-bold text-white">{title}</Text>
+    <Flex justify="space-between">
+      <Text
+        fw="bold"
+        classNames={{ root: "text-4xl text-white" }}>
+        {title}
+      </Text>
       {!!linkUrl && (
         <Button
           variant="outline"
           component={Link}
           href={linkUrl}
-          className="font-bold text-white border border-lightGray rounded-3xl hover:bg-white hover:border-white hover:text-black">
+          fw="bold"
+          radius="xl"
+          classNames={{
+            root: "text-white border border-lightGray hover:bg-white hover:border-white hover:text-black"
+          }}>
           More
         </Button>
       )}

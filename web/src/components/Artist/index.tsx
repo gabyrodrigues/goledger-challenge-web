@@ -16,23 +16,46 @@ export function Artist({ id, name }: ArtistProps) {
 
   return (
     <>
-      <Flex className="justify-between items-center w-min p-1 rounded hover:bg-darkGray">
+      <Flex
+        align="center"
+        justify="space-between"
+        p={1}
+        classNames={{
+          root: " w-min p-1 rounded hover:bg-darkGray"
+        }}>
         <Link href={`/artists/${id}`}>
-          <Flex className="items-center">
+          <Flex align="center">
             <Group>
-              <Flex className="bg-gray text-white w-40 h-40 rounded-full justify-center items-center relative">
+              <Flex
+                w={160}
+                h={160}
+                align="center"
+                justify="center"
+                pos="relative"
+                classNames={{
+                  root: "bg-gray text-white rounded-full"
+                }}>
                 <IconUserFilled size={64} />
 
                 <Menu width={200}>
                   <Menu.Target>
                     <ActionIcon
-                      className="rounded-full p-3 hover:bg-lightGray hover:bg-opacity-50 absolute right-2 top-1/2"
+                      p={3}
+                      pos="absolute"
+                      right={2}
+                      top="50%"
+                      classNames={{
+                        root: "bg-transparent rounded-full hover:bg-lightGray hover:bg-opacity-50"
+                      }}
                       onClick={(e) => e.preventDefault()}>
                       <IconDotsVertical size={24} />
                     </ActionIcon>
                   </Menu.Target>
 
-                  <Menu.Dropdown className="bg-darkGray text-white">
+                  <Menu.Dropdown
+                    classNames={{
+                      dropdown: "bg-darkGray text-white"
+                    }}>
                     <Menu.Item
                       component={Link}
                       href="/">
@@ -43,13 +66,20 @@ export function Artist({ id, name }: ArtistProps) {
                         e.preventDefault();
                         open();
                       }}
-                      className="text-red-400 hover:bg-neutral-700">
+                      classNames={{
+                        item: "text-red-400 hover:bg-neutral-700"
+                      }}>
                       Delete Artist
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
               </Flex>
-              <Text className="text-xl font-bold text-white line-clamp-2 text-center w-full">
+              <Text
+                fz="xl"
+                fw="bold"
+                ta="center"
+                w="100%"
+                classNames={{ root: "text-white line-clamp-2" }}>
                 {name}
               </Text>
             </Group>
