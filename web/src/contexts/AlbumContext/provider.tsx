@@ -1,10 +1,10 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 
 import { AlbumContext, AlbumItem } from ".";
 import api from "@/services/api";
 import { Album, Artist, Song } from "@/utils/data";
-import { SongItem } from "../SongContext";
+import { SongContext, SongItem } from "../SongContext";
 import { notifications } from "@mantine/notifications";
 
 interface AlbumContextProviderProps {
@@ -15,6 +15,7 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
   const [albums, setAlbums] = useState<AlbumItem[]>([]);
   const [album, setAlbum] = useState<AlbumItem | null>(null);
   const [albumSongs, setAlbumSongs] = useState<SongItem[]>([]);
+  const { handleDeleteSong } = useContext(SongContext);
 
   async function handleAlbumsWithArtists(albumsData: Album[]): Promise<AlbumItem[]> {
     const albumsWithArtists = await Promise.all(
@@ -168,7 +169,7 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
 
         setAlbum(album);
         setAlbumSongs(albumSongs);
-        return album;
+        return { album: albumsData[0], albumWithInfo: album };
       } catch (error) {
         setAlbum(null);
         console.error(error);
@@ -180,7 +181,18 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
 
   async function handleDeleteAlbum(albumId: string) {
     console.log("delete", albumId);
+
     try {
+      const albumInfo = await fetchAlbumById(albumId);
+
+      if (albumInfo) {
+        const songsFromAlbum = await handleAlbumSongs(albumInfo.album);
+
+        if (songsFromAlbum.length > 0) {
+          await Promise.all(songsFromAlbum.map((song) => handleDeleteSong(song.id)));
+        }
+      }
+
       await api.post("invoke/deleteAsset", {
         key: {
           "@assetType": "album",

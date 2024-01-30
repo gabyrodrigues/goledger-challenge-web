@@ -51,14 +51,14 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
           songResponse.data.result.map(async (songData: Song) => {
             const artistKeys = songData.artists.map((artist) => artist["@key"]);
             const artistNames = await fetchArtistNames(artistKeys);
-            const albumInfo = await fetchAlbumById(songData.album["@key"]);
+            const album = await fetchAlbumById(songData.album["@key"]);
 
             return {
               id: songData["@key"],
               title: songData.title,
               explicit: songData.explicit,
               artists: artistNames,
-              album: albumInfo?.title
+              album: album?.albumWithInfo.title
             };
           })
         );

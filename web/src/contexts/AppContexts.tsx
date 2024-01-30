@@ -11,12 +11,12 @@ interface AppContextsProps {
 
 export function AppContexts({ children }: AppContextsProps) {
   return (
-    <AlbumContextProvider>
-      <SongContextProvider>
+    <SongContextProvider>
+      <AlbumContextProvider>
         <PlaylistContextProvider>
           <ArtistContextProvider>{children}</ArtistContextProvider>
         </PlaylistContextProvider>
-      </SongContextProvider>
-    </AlbumContextProvider>
+      </AlbumContextProvider>
+    </SongContextProvider>
   );
 }

@@ -1,5 +1,7 @@
 import { createContext } from "react";
+
 import { SongItem } from "../SongContext";
+import { Album } from "@/utils/data";
 
 interface AlbumProps {
   albums: AlbumItem[];
@@ -7,7 +9,7 @@ interface AlbumProps {
   albumSongs: SongItem[];
   fetchFirstAlbums: () => Promise<void>;
   fetchAllAlbums: () => Promise<void>;
-  fetchAlbumById: (albumId: string) => Promise<AlbumItem | null>;
+  fetchAlbumById: (albumId: string) => Promise<{ album: Album; albumWithInfo: AlbumItem } | null>;
   fetchArtistNames: (artistKeys: string[]) => Promise<string[]>;
   handleDeleteAlbum: (albumId: string) => Promise<void>;
 }

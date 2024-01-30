@@ -152,6 +152,7 @@ export default function SongContextProvider(props: SongContextProviderProps) {
   }
 
   async function handleDeleteSong(songId: string) {
+    console.log("delete song", songId);
     try {
       const playlistsWithSong = await findPlaylistsBySong(songId);
       if (playlistsWithSong.length > 0) {
