@@ -1,4 +1,5 @@
-import { SimpleGrid, Stack } from "@mantine/core";
+import { SimpleGrid, Stack, Text } from "@mantine/core";
+
 import { Album } from "../Album";
 import { SectionHeading } from "../SectionHeading";
 import { AlbumItem } from "@/contexts/AlbumContext";
@@ -15,19 +16,30 @@ export function AlbumsSection({ items, linkUrl }: AlbumsSectionProps) {
         linkUrl={linkUrl}
       />
 
-      <SimpleGrid
-        cols={6}
-        classNames={{
-          root: "items-start"
-        }}>
-        {items.map((item) => (
-          <Album
-            key={item.id}
-            id={item.id}
-            title={item.title}
-          />
-        ))}
-      </SimpleGrid>
+      {items.length ? (
+        <SimpleGrid
+          cols={6}
+          classNames={{
+            root: "items-start"
+          }}>
+          {items.map((item) => (
+            <Album
+              key={item.id}
+              id={item.id}
+              title={item.title}
+            />
+          ))}
+        </SimpleGrid>
+      ) : (
+        <Text
+          fs="italic"
+          ta="center"
+          classNames={{
+            root: "text-lightGray"
+          }}>
+          No albums to display.
+        </Text>
+      )}
     </Stack>
   );
 }

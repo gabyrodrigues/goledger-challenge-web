@@ -285,8 +285,10 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   dropdown: "bg-darkGray text-white"
                 }}>
                 <Menu.Item
-                  component={Link}
-                  href="/">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.replace(`/artists/update/${artist!.id}`);
+                  }}>
                   Update Artist
                 </Menu.Item>
                 <Menu.Item

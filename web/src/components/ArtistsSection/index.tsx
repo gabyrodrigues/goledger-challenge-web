@@ -1,4 +1,4 @@
-import { SimpleGrid, Stack } from "@mantine/core";
+import { SimpleGrid, Stack, Text } from "@mantine/core";
 import { Artist } from "../Artist";
 import { SectionHeading } from "../SectionHeading";
 import { ArtistItem } from "@/contexts/ArtistContext";
@@ -14,20 +14,30 @@ export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
         title="Artists"
         linkUrl={linkUrl}
       />
-
-      <SimpleGrid
-        cols={6}
-        classNames={{
-          root: "items-start"
-        }}>
-        {items.map((item) => (
-          <Artist
-            key={item.id}
-            id={item.id}
-            name={item.name}
-          />
-        ))}
-      </SimpleGrid>
+      {items.length ? (
+        <SimpleGrid
+          cols={6}
+          classNames={{
+            root: "items-start"
+          }}>
+          {items.map((item) => (
+            <Artist
+              key={item.id}
+              id={item.id}
+              name={item.name}
+            />
+          ))}
+        </SimpleGrid>
+      ) : (
+        <Text
+          fs="italic"
+          ta="center"
+          classNames={{
+            root: "text-lightGray"
+          }}>
+          No artists to display.
+        </Text>
+      )}
     </Stack>
   );
 }

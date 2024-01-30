@@ -1,4 +1,4 @@
-import { SimpleGrid, Stack } from "@mantine/core";
+import { SimpleGrid, Stack, Text } from "@mantine/core";
 
 import { Song } from "../Song";
 import { SectionHeading } from "../SectionHeading";
@@ -18,17 +18,28 @@ export function SongsSection({ items, linkUrl }: SongsSectionProps) {
         linkUrl={linkUrl}
       />
 
-      <SimpleGrid cols={3}>
-        {items.map((item) => (
-          <Song
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            explicit={item.explicit}
-            artists={item.artists}
-          />
-        ))}
-      </SimpleGrid>
+      {items.length ? (
+        <SimpleGrid cols={3}>
+          {items.map((item) => (
+            <Song
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              explicit={item.explicit}
+              artists={item.artists}
+            />
+          ))}
+        </SimpleGrid>
+      ) : (
+        <Text
+          fs="italic"
+          ta="center"
+          classNames={{
+            root: "text-lightGray"
+          }}>
+          No songs to display.
+        </Text>
+      )}
     </Stack>
   );
 }
