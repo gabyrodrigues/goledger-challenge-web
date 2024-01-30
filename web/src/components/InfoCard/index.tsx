@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ActionIcon, Flex, Group, Menu, Stack, Text } from "@mantine/core";
+import { ActionIcon, Flex, Group, Menu, Stack, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDotsVertical,
@@ -92,11 +92,12 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
             justify="space-between"
             classNames={{ root: "flex-1" }}>
             <Stack gap={8}>
-              <Text
+              <Title
+                order={1}
                 fw="bold"
-                classNames={{ root: "text-3xl font-bold text-white" }}>
+                c="var(--mantine-color-gray-0)">
                 {song?.title}
-              </Text>
+              </Title>
               <Group
                 gap={4}
                 align="center">
@@ -145,11 +146,12 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
             justify="space-between"
             classNames={{ root: "flex-1" }}>
             <Stack gap={8}>
-              <Text
+              <Title
+                order={1}
                 fw="bold"
-                classNames={{ root: "text-3xl font-bold text-white" }}>
+                c="var(--mantine-color-gray-0)">
                 {album?.title}
-              </Text>
+              </Title>
               <Group
                 gap={4}
                 align="center">
@@ -209,11 +211,12 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
             justify="space-between"
             classNames={{ root: "flex-1" }}>
             <Stack gap={8}>
-              <Text
+              <Title
+                order={1}
                 fw="bold"
-                classNames={{ root: "text-3xl font-bold text-white" }}>
+                c="var(--mantine-color-gray-0)">
                 {playlist?.name}
-              </Text>
+              </Title>
               <Text classNames={{ root: "text-lightGray" }}>{playlist?.description}</Text>
             </Stack>
             <Menu width={200}>
@@ -257,11 +260,12 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
             justify="space-between"
             classNames={{ root: "flex-1" }}>
             <Stack gap={8}>
-              <Text
+              <Title
+                order={1}
                 fw="bold"
-                classNames={{ root: "text-3xl font-bold text-white" }}>
+                c="var(--mantine-color-gray-0)">
                 {artist?.name}
-              </Text>
+              </Title>
               <Text classNames={{ root: "text-lightGray" }}>{artist?.about}</Text>
             </Stack>
             <Menu width={200}>

@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from "@mantine/core";
+import { Button, Flex, Title } from "@mantine/core";
 import Link from "next/link";
 
 interface SectionHeadingProps {
@@ -8,11 +8,12 @@ interface SectionHeadingProps {
 export function SectionHeading({ title, linkUrl }: SectionHeadingProps) {
   return (
     <Flex justify="space-between">
-      <Text
+      <Title
+        order={1}
         fw="bold"
-        classNames={{ root: "text-4xl text-white" }}>
+        c="var(--mantine-color-gray-0)">
         {title}
-      </Text>
+      </Title>
       {!!linkUrl && (
         <Button
           variant="outline"
@@ -21,7 +22,7 @@ export function SectionHeading({ title, linkUrl }: SectionHeadingProps) {
           fw="bold"
           radius="xl"
           classNames={{
-            root: "text-white border border-lightGray hover:bg-white hover:border-white hover:text-black"
+            root: "text-primary border border-lightGray hover:bg-white hover:border-white hover:text-black"
           }}>
           More
         </Button>

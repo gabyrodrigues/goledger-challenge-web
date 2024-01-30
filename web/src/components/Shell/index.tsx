@@ -19,7 +19,7 @@ export function Shell({ children }: ShellProps) {
         withBorder={false}
         px={40}
         py={24}
-        classNames={{ navbar: "bg-darkGray" }}>
+        bg="var(--mantine-color-dark-9)">
         <Stack gap={20}>
           <Link href="/">
             <Image
