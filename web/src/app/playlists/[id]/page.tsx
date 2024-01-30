@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { Stack } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 
 import { InfoCard } from "@/components/InfoCard";
 import { Song } from "@/components/Song";
@@ -24,15 +24,21 @@ export default function PlaylistId() {
       />
 
       <Stack className="gap-2">
-        {playlist?.songs.map((song) => (
-          <Song
-            key={song.id}
-            id={song.id}
-            title={song.title}
-            explicit={song.explicit}
-            artists={song.artists}
-          />
-        ))}
+        {playlist?.songs.length ? (
+          playlist?.songs.map((song) => (
+            <Song
+              key={song.id}
+              id={song.id}
+              title={song.title}
+              explicit={song.explicit}
+              artists={song.artists}
+            />
+          ))
+        ) : (
+          <Text className="text-center text-lightGray italic">
+            No songs to display. Update the playlist to add songs.
+          </Text>
+        )}
       </Stack>
     </Stack>
   );

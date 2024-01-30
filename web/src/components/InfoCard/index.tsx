@@ -1,12 +1,21 @@
 "use client";
+import { useContext } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ActionIcon, Flex, Group, Menu, Stack, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   IconDotsVertical,
   IconExplicit,
   IconPlayerPlayFilled,
   IconUserFilled
 } from "@tabler/icons-react";
+
+import { DeleteModal } from "../DeleteModal";
+import { SongContext } from "@/contexts/SongContext";
+import { AlbumContext } from "@/contexts/AlbumContext";
+import { ArtistContext } from "@/contexts/ArtistContext";
+import { PlaylistContext } from "@/contexts/PlaylistContext";
 
 interface InfoCardProps {
   type: "song" | "album" | "artist" | "playlist";
@@ -18,22 +27,52 @@ interface InfoCardProps {
     album: string;
   };
   album?: {
+    id: string;
     title: string;
     artist: string;
     releaseDate: string;
     rating?: number;
   };
   artist?: {
+    id: string;
     name: string;
     about: string;
   };
   playlist?: {
+    id: string;
     name: string;
     description: string;
   };
 }
 
 export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps) {
+  const [opened, { close, open }] = useDisclosure(false);
+  const router = useRouter();
+
+  const { handleDeleteSong } = useContext(SongContext);
+  const { handleDeleteAlbum } = useContext(AlbumContext);
+  const { handleDeleteArtist } = useContext(ArtistContext);
+  const { handleDeletePlaylist } = useContext(PlaylistContext);
+
+  async function handleDeleteItem() {
+    switch (type) {
+      case "song":
+        await handleDeleteSong(song!.id);
+        break;
+      case "album":
+        await handleDeleteAlbum(album!.id);
+        break;
+      case "playlist":
+        await handleDeletePlaylist(playlist!.id);
+        break;
+      case "artist":
+        await handleDeleteArtist(playlist!.id);
+        break;
+    }
+
+    router.push("/");
+  }
+
   function renderCardIcon() {
     switch (type) {
       case "song":
@@ -73,9 +112,11 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   Update Song
                 </Menu.Item>
                 <Menu.Item
-                  component={Link}
-                  href="/"
-                  className="text-red-400">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    open();
+                  }}
+                  className="text-red-400 hover:bg-neutral-700">
                   Delete Song
                 </Menu.Item>
               </Menu.Dropdown>
@@ -117,9 +158,11 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   Update Album
                 </Menu.Item>
                 <Menu.Item
-                  component={Link}
-                  href="/"
-                  className="text-red-400">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    open();
+                  }}
+                  className="text-red-400 hover:bg-neutral-700">
                   Delete Album
                 </Menu.Item>
               </Menu.Dropdown>
@@ -147,9 +190,11 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   Update Playlist
                 </Menu.Item>
                 <Menu.Item
-                  component={Link}
-                  href="/"
-                  className="text-red-400">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    open();
+                  }}
+                  className="text-red-400 hover:bg-neutral-700">
                   Delete Playlist
                 </Menu.Item>
               </Menu.Dropdown>
@@ -177,9 +222,11 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   Update Artist
                 </Menu.Item>
                 <Menu.Item
-                  component={Link}
-                  href="/"
-                  className="text-red-400">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    open();
+                  }}
+                  className="text-red-400 hover:bg-neutral-700">
                   Delete Artist
                 </Menu.Item>
               </Menu.Dropdown>
@@ -190,13 +237,24 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
   }
 
   return (
-    <Flex className="items-center justify-between">
-      <Group className="flex-nowrap justify-start gap-8 w-full">
-        <Flex className="bg-gray text-white w-40 h-40 justify-center items-center">
-          {renderCardIcon()}
-        </Flex>
-        {renderCardInfo()}
-      </Group>
-    </Flex>
+    <>
+      <Flex className="items-center justify-between">
+        <Group className="flex-nowrap justify-start gap-8 w-full">
+          <Flex className="bg-gray text-white w-40 h-40 justify-center items-center">
+            {renderCardIcon()}
+          </Flex>
+          {renderCardInfo()}
+        </Group>
+      </Flex>
+
+      {opened && (
+        <DeleteModal
+          opened={opened}
+          open={open}
+          close={close}
+          onDelete={handleDeleteItem}
+        />
+      )}
+    </>
   );
 }
