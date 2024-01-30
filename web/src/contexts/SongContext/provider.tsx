@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { notifications } from "@mantine/notifications";
 
 import { SongContext, SongItem } from ".";
-import { Song } from "@/utils/data";
+import { Playlist, Song } from "@/utils/data";
 import api from "@/services/api";
 
 interface SongContextProviderProps {
@@ -112,9 +112,54 @@ export default function SongContextProvider(props: SongContextProviderProps) {
     }
   }, []);
 
-  async function handleDeleteSong(songId: string) {
-    console.log("delete", songId);
+  async function findPlaylistsBySong(songId: string): Promise<Playlist[]> {
     try {
+      const playlistResponse = await api.post("query/search", {
+        query: {
+          selector: {
+            "@assetType": "playlist",
+            songs: {
+              $elemMatch: {
+                "@key": songId
+              }
+            }
+          },
+          fields: ["@key", "name", "description", "songs"]
+        }
+      });
+
+      return playlistResponse.data.result as Playlist[];
+    } catch (error) {
+      console.error("Error finding playlists by song:", error);
+      throw error;
+    }
+  }
+
+  async function updateSongsFromPlaylist(playlist: Playlist, songId: string): Promise<void> {
+    try {
+      const playlistSongs = playlist.songs.filter((song) => song["@key"] !== songId);
+      await api.post("invoke/updateAsset", {
+        update: {
+          "@assetType": "playlist",
+          "@key": playlist["@key"],
+          songs: playlistSongs
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  async function handleDeleteSong(songId: string) {
+    try {
+      const playlistsWithSong = await findPlaylistsBySong(songId);
+      if (playlistsWithSong.length > 0) {
+        await Promise.all(
+          playlistsWithSong.map((playlist) => updateSongsFromPlaylist(playlist, songId))
+        );
+      }
+
       await api.post("invoke/deleteAsset", {
         key: {
           "@assetType": "song",

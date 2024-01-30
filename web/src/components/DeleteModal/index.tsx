@@ -10,8 +10,8 @@ interface DeleteModalProps {
 
 export function DeleteModal({ opened, close, onDelete }: DeleteModalProps): JSX.Element {
   async function handleDelete() {
-    await onDelete();
     close();
+    await onDelete();
   }
 
   return (
@@ -25,7 +25,10 @@ export function DeleteModal({ opened, close, onDelete }: DeleteModalProps): JSX.
         direction="column"
         align="center">
         <Text className="font-semibold text-gray-600 text-xl">
-          Are you sure you want to delete it? All of its possible related contents may be deleted.
+          Are you sure you want to delete it?
+        </Text>
+        <Text className="text-gray-600">
+          All of its possible related contents may also be deleted.
         </Text>
 
         <Group className="mt-8">
