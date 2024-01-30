@@ -1,6 +1,5 @@
 "use client";
 import { useCallback, useState } from "react";
-import { notifications } from "@mantine/notifications";
 
 import { SongContext, SongItem } from ".";
 import { Playlist, Song } from "@/utils/data";
@@ -152,7 +151,6 @@ export default function SongContextProvider(props: SongContextProviderProps) {
   }
 
   async function handleDeleteSong(songId: string) {
-    console.log("delete song", songId);
     try {
       const playlistsWithSong = await findPlaylistsBySong(songId);
       if (playlistsWithSong.length > 0) {
@@ -170,19 +168,8 @@ export default function SongContextProvider(props: SongContextProviderProps) {
 
       const filteredList = songs.filter((song) => song.id !== songId);
       setSongs(filteredList);
-
-      notifications.show({
-        autoClose: 3000,
-        message: "Song deleted!",
-        color: "green"
-      });
     } catch (error) {
       console.error(error);
-      notifications.show({
-        autoClose: 3000,
-        message: "Song not deleted! Please try again.",
-        color: "red"
-      });
     }
   }
 

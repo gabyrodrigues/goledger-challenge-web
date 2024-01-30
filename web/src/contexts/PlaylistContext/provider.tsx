@@ -5,7 +5,6 @@ import { PlaylistContext, PlaylistItem } from ".";
 import { Playlist, Song } from "@/utils/data";
 import api from "@/services/api";
 import { AlbumContext } from "../AlbumContext";
-import { notifications } from "@mantine/notifications";
 
 interface PlaylistContextProviderProps {
   children: React.ReactNode;
@@ -128,7 +127,6 @@ export default function PlaylistContextProvider(props: PlaylistContextProviderPr
   );
 
   async function handleDeletePlaylist(playlistId: string) {
-    console.log("delete", playlistId);
     try {
       await api.post("invoke/deleteAsset", {
         key: {
@@ -139,19 +137,8 @@ export default function PlaylistContextProvider(props: PlaylistContextProviderPr
 
       const filteredList = playlists.filter((playlist) => playlist.id !== playlistId);
       setPlaylists(filteredList);
-
-      notifications.show({
-        autoClose: 3000,
-        message: "Playlist deleted!",
-        color: "green"
-      });
     } catch (error) {
       console.error(error);
-      notifications.show({
-        autoClose: 3000,
-        message: "Playlist not deleted! Please try again.",
-        color: "red"
-      });
     }
   }
 

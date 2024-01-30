@@ -1,6 +1,5 @@
 "use client";
 import { useCallback, useContext, useState } from "react";
-import { notifications } from "@mantine/notifications";
 
 import api from "@/services/api";
 import { Album, Artist, Song } from "@/utils/data";
@@ -17,7 +16,7 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
   const [artist, setArtist] = useState<ArtistItem | null>(null);
   const [artistSongs, setArtistSongs] = useState<SongItem[]>([]);
   const [artistAlbums, setArtistAlbums] = useState<AlbumItem[]>([]);
-  const { fetchArtistNames, fetchAlbumById } = useContext(AlbumContext);
+  const { fetchArtistNames, fetchAlbumById, handleDeleteAlbum } = useContext(AlbumContext);
 
   async function handleArtistData(artistsData: Artist[]): Promise<ArtistItem[]> {
     const artists = artistsData.map((artist: Artist) => {
@@ -161,21 +160,33 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
         const artists = await handleArtistData(artistsData);
         const artistSongs = await handleArtistSongs(artistsData[0]);
         const artistAlbums = await handleArtistAlbums(artistsData[0]);
-        console.log({ artists, artistSongs, artistAlbums });
+
         setArtist(artists[0]);
         setArtistSongs(artistSongs);
         setArtistAlbums(artistAlbums);
+
+        return { artist: artistsData, artistWithInfo: artists[0] };
       } catch (error) {
         setArtist(null);
         console.error(error);
+        return null;
       }
     },
     [handleArtistAlbums, handleArtistSongs]
   );
 
   async function handleDeleteArtist(artistId: string) {
-    console.log("delete", artistId);
     try {
+      const artistInfo = await fetchArtistById(artistId);
+
+      if (artistInfo) {
+        const albumsWithArtist = await handleArtistAlbums(artistInfo.artist);
+
+        if (albumsWithArtist.length > 0) {
+          await Promise.all(albumsWithArtist.map((album) => handleDeleteAlbum(album.id)));
+        }
+      }
+
       await api.post("invoke/deleteAsset", {
         key: {
           "@assetType": "artist",
@@ -185,19 +196,8 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
 
       const filteredList = artists.filter((artist) => artist.id !== artistId);
       setArtists(filteredList);
-
-      notifications.show({
-        autoClose: 3000,
-        message: "Artist deleted!",
-        color: "green"
-      });
     } catch (error) {
       console.error(error);
-      notifications.show({
-        autoClose: 3000,
-        message: "Artist not deleted! Please try again.",
-        color: "red"
-      });
     }
   }
 

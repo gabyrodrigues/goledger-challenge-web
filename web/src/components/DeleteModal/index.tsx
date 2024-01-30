@@ -1,4 +1,5 @@
 import { Modal, Text, Group, Flex, Button } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { IconArrowBackUp, IconExclamationCircle } from "@tabler/icons-react";
 
 interface DeleteModalProps {
@@ -10,8 +11,22 @@ interface DeleteModalProps {
 
 export function DeleteModal({ opened, close, onDelete }: DeleteModalProps): JSX.Element {
   async function handleDelete() {
-    close();
-    await onDelete();
+    try {
+      close();
+      await onDelete();
+      notifications.show({
+        autoClose: 3000,
+        message: "Deleted successfully!",
+        color: "green"
+      });
+    } catch (error) {
+      console.error(error);
+      notifications.show({
+        autoClose: 3000,
+        message: "It was not possible to delete! Please try again.",
+        color: "red"
+      });
+    }
   }
 
   return (
