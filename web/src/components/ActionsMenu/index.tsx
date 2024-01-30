@@ -26,22 +26,22 @@ export function ActionsMenu() {
         }}>
         <Menu.Item
           component={Link}
-          href="/">
+          href="/artists/new">
           New Artist
         </Menu.Item>
         <Menu.Item
           component={Link}
-          href="/">
+          href="/albums/new">
           New Album
         </Menu.Item>
         <Menu.Item
           component={Link}
-          href="/">
+          href="/songs/new">
           New Song
         </Menu.Item>
         <Menu.Item
           component={Link}
-          href="/">
+          href="/playlists/new">
           New Playlist
         </Menu.Item>
       </Menu.Dropdown>

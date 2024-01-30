@@ -2,7 +2,8 @@
 import { useCallback, useContext, useState } from "react";
 
 import api from "@/services/api";
-import { Album, Artist, Song } from "@/utils/data";
+import { Album, Artist, CreateAnArtist, Song } from "@/utils/data";
+import { EMPTY_ARTIST } from "@/forms/Artist/emptyArtist";
 import { ArtistContext, ArtistItem } from ".";
 import { SongItem } from "../SongContext";
 import { AlbumContext, AlbumItem } from "../AlbumContext";
@@ -16,6 +17,7 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
   const [artist, setArtist] = useState<ArtistItem | null>(null);
   const [artistSongs, setArtistSongs] = useState<SongItem[]>([]);
   const [artistAlbums, setArtistAlbums] = useState<AlbumItem[]>([]);
+  const [activeArtist, setActiveArtist] = useState(EMPTY_ARTIST);
   const { fetchArtistNames, fetchAlbumById, handleDeleteAlbum } = useContext(AlbumContext);
 
   async function handleArtistData(artistsData: Artist[]): Promise<ArtistItem[]> {
@@ -201,15 +203,32 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
     }
   }
 
+  async function createArtist(values: CreateAnArtist) {
+    try {
+      await api.post("invoke/createAsset", {
+        asset: [
+          {
+            ...values
+          }
+        ]
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const values = {
     artists,
     artist,
     artistSongs,
     artistAlbums,
+    activeArtist,
+    setActiveArtist,
     fetchFirstArtists,
     fetchAllArtists,
     fetchArtistById,
-    handleDeleteArtist
+    handleDeleteArtist,
+    createArtist
   };
 
   return <ArtistContext.Provider value={values}>{props.children}</ArtistContext.Provider>;
