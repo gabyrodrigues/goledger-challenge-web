@@ -2,7 +2,7 @@
 import { useCallback, useContext, useState } from "react";
 
 import api from "@/services/api";
-import { Album, Artist, CreateAnArtist, Song } from "@/utils/data";
+import { Album, Artist, CreateAnArtist, Song, UpdateAnArtist } from "@/utils/data";
 import { EMPTY_ARTIST } from "@/forms/Artist/emptyArtist";
 import { ArtistContext, ArtistItem } from ".";
 import { SongItem } from "../SongContext";
@@ -166,10 +166,12 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
         setArtist(artists[0]);
         setArtistSongs(artistSongs);
         setArtistAlbums(artistAlbums);
+        setActiveArtist(artistsData[0]);
 
-        return { artist: artistsData, artistWithInfo: artists[0] };
+        return { artist: artistsData[0], artistWithInfo: artists[0] };
       } catch (error) {
         setArtist(null);
+        setActiveArtist(EMPTY_ARTIST);
         console.error(error);
         return null;
       }
@@ -217,6 +219,22 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
     }
   }
 
+  async function updateArtist(artistId: string, values: UpdateAnArtist) {
+    console.log("updateArtist", values);
+    try {
+      await api.post("invoke/updateAsset", {
+        update: {
+          "@assetType": "artist",
+          "@key": artistId,
+          ...values
+        }
+      });
+      setActiveArtist(EMPTY_ARTIST);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const values = {
     artists,
     artist,
@@ -228,7 +246,8 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
     fetchAllArtists,
     fetchArtistById,
     handleDeleteArtist,
-    createArtist
+    createArtist,
+    updateArtist
   };
 
   return <ArtistContext.Provider value={values}>{props.children}</ArtistContext.Provider>;

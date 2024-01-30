@@ -1,31 +1,43 @@
 import { useContext, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button, Flex, Loader, TextInput, Textarea } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { joiResolver } from "@mantine/form";
 
-import { ArtistFormData, CreateAnArtist } from "@/utils/data";
+import { ArtistFormData, CreateAnArtist, UpdateAnArtist } from "@/utils/data";
 import { ArtistFormProvider, useArtistForm } from "@/contexts/ArtistFormContext";
 import { ArtistContext } from "@/contexts/ArtistContext";
 import createArtistSchema from "./createArtistSchema";
 import { handleTransformSubmittedValues } from "./formatters";
+import { getDirtyValues } from "@/utils/transfomData";
 
 export function ArtistForm() {
+  const pathname = usePathname();
   const router = useRouter();
   const submitRef = useRef<HTMLButtonElement | null>(null);
-  const { activeArtist, createArtist } = useContext(ArtistContext);
+  const { activeArtist, createArtist, updateArtist } = useContext(ArtistContext);
 
+  const isCreateForm = pathname == "/artists/new";
   const form = useArtistForm({
     initialValues: { ...(activeArtist as ArtistFormData) },
     validate: joiResolver(createArtistSchema()),
     transformValues: (values: ArtistFormData) => handleTransformSubmittedValues(values)
   });
+  const formHasErrors = Object.keys(form.errors).length !== 0;
 
-  async function handleFormSubmit(values: ArtistFormData) {
+  function handleFormSubmit(values: ArtistFormData) {
     if (submitRef.current) {
       submitRef.current.disabled = true;
     }
 
+    if (isCreateForm) {
+      handleFormCreate(values);
+    } else {
+      handleFormUpdate(values);
+    }
+  }
+
+  async function handleFormCreate(values: ArtistFormData) {
     const createValues = {
       "@assetType": values["@assetType"],
       name: values.name,
@@ -33,7 +45,6 @@ export function ArtistForm() {
     };
 
     try {
-      console.log("submit", values, createValues);
       await createArtist(createValues as CreateAnArtist);
 
       notifications.show({
@@ -57,6 +68,33 @@ export function ArtistForm() {
     }
   }
 
+  async function handleFormUpdate(values: ArtistFormData) {
+    const updateValues = getDirtyValues<ArtistFormData>(values, form);
+    console.log("update", values);
+    try {
+      await updateArtist(values["@key"], updateValues as UpdateAnArtist);
+
+      notifications.show({
+        autoClose: 3000,
+        message: "Artist updated successfully!",
+        color: "green"
+      });
+
+      router.push("/artists");
+    } catch (error) {
+      console.error(error);
+      notifications.show({
+        autoClose: 3000,
+        message: "It was not possible to update! Please try again.",
+        color: "red"
+      });
+    }
+
+    if (submitRef.current) {
+      submitRef.current.disabled = false;
+    }
+  }
+
   function handleFormErrors(errors: typeof form.errors, values: typeof form.values) {
     console.log({ errors, values });
 
@@ -66,8 +104,6 @@ export function ArtistForm() {
       color: "red"
     });
   }
-
-  const formHasErrors = Object.keys(form.errors).length !== 0;
 
   return (
     <ArtistFormProvider form={form}>

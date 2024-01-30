@@ -1,7 +1,13 @@
 import { createContext } from "react";
 import { SongItem } from "../SongContext";
 import { AlbumItem } from "../AlbumContext";
-import { Artist, ArtistFormData, CreateAnArtist, EmptyFormArtist } from "@/utils/data";
+import {
+  Artist,
+  ArtistFormData,
+  CreateAnArtist,
+  EmptyFormArtist,
+  UpdateAnArtist
+} from "@/utils/data";
 
 interface ArtistProps {
   artists: ArtistItem[];
@@ -18,6 +24,7 @@ interface ArtistProps {
   } | null>;
   handleDeleteArtist: (artistId: string) => Promise<void>;
   createArtist: (values: CreateAnArtist) => Promise<void>;
+  updateArtist: (artistId: string, values: UpdateAnArtist) => Promise<void>;
 }
 
 export interface ArtistItem {

@@ -38,5 +38,5 @@ export interface ArtistFormData extends Artist {
 }
 
 export interface EmptyFormArtist extends Partial<ArtistFormData> {}
-
 export interface CreateAnArtist extends Omit<Artist, "@key"> {}
+export interface UpdateAnArtist extends Partial<ArtistFormData> {}

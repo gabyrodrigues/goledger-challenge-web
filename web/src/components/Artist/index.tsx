@@ -7,10 +7,12 @@ import { IconDotsVertical, IconUserFilled } from "@tabler/icons-react";
 
 import { ArtistContext, ArtistItem } from "@/contexts/ArtistContext";
 import { DeleteModal } from "../DeleteModal";
+import { useRouter } from "next/navigation";
 
 interface ArtistProps extends Omit<ArtistItem, "about"> {}
 
 export function Artist({ id, name }: ArtistProps) {
+  const router = useRouter();
   const [opened, { close, open }] = useDisclosure(false);
   const { handleDeleteArtist } = useContext(ArtistContext);
 
@@ -57,8 +59,10 @@ export function Artist({ id, name }: ArtistProps) {
                       dropdown: "bg-darkGray text-white"
                     }}>
                     <Menu.Item
-                      component={Link}
-                      href="/">
+                      onClick={(e) => {
+                        e.preventDefault();
+                        router.replace(`/artists/update/${id}`);
+                      }}>
                       Update Artist
                     </Menu.Item>
                     <Menu.Item
