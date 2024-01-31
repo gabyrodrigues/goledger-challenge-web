@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { Stack } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 
 import { InfoCard } from "@/components/InfoCard";
 import { Song } from "@/components/Song";
@@ -23,17 +23,28 @@ export default function AlbumId() {
         album={album as AlbumItem}
       />
 
-      <Stack gap={8}>
-        {albumSongs.map((song) => (
-          <Song
-            key={song.id}
-            id={song.id}
-            title={song.title}
-            artists={song.artists}
-            explicit={song.explicit}
-          />
-        ))}
-      </Stack>
+      {albumSongs.length ? (
+        <Stack gap={8}>
+          {albumSongs.map((song) => (
+            <Song
+              key={song.id}
+              id={song.id}
+              title={song.title}
+              artists={song.artists}
+              explicit={song.explicit}
+            />
+          ))}
+        </Stack>
+      ) : (
+        <Text
+          fs="italic"
+          ta="center"
+          classNames={{
+            root: "text-lightGray"
+          }}>
+          No album songs to display.
+        </Text>
+      )}
     </Stack>
   );
 }

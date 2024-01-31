@@ -3,8 +3,9 @@ import { useCallback, useContext, useState } from "react";
 
 import { AlbumContext, AlbumItem } from ".";
 import api from "@/services/api";
-import { Album, Artist, Song } from "@/utils/data";
+import { Album, Artist, CreateAnAlbum, Song, UpdateAnAlbum } from "@/utils/data";
 import { SongContext, SongItem } from "../SongContext";
+import { EMPTY_ALBUM } from "@/forms/Album/emptyAlbum";
 
 interface AlbumContextProviderProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
   const [albums, setAlbums] = useState<AlbumItem[]>([]);
   const [album, setAlbum] = useState<AlbumItem | null>(null);
   const [albumSongs, setAlbumSongs] = useState<SongItem[]>([]);
+  const [activeAlbum, setActiveAlbum] = useState(EMPTY_ALBUM);
   const { handleDeleteSong } = useContext(SongContext);
 
   async function handleAlbumsWithArtists(albumsData: Album[]): Promise<AlbumItem[]> {
@@ -168,6 +170,7 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
 
         setAlbum(album);
         setAlbumSongs(albumSongs);
+        setActiveAlbum(albumsData[0]);
         return { album: albumsData[0], albumWithInfo: album };
       } catch (error) {
         setAlbum(null);
@@ -204,15 +207,50 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
     }
   }
 
+  async function createAlbum(values: CreateAnAlbum) {
+    console.log("createAlbum", values);
+    try {
+      await api.post("invoke/createAsset", {
+        asset: [
+          {
+            ...values
+          }
+        ]
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function updateAlbum(albumId: string, values: UpdateAnAlbum) {
+    console.log("updateAlbum", values);
+    try {
+      await api.post("invoke/updateAsset", {
+        update: {
+          "@assetType": "album",
+          "@key": albumId,
+          ...values
+        }
+      });
+      setActiveAlbum(EMPTY_ALBUM);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const values = {
     albums,
     album,
     albumSongs,
+    activeAlbum,
+    setActiveAlbum,
     fetchFirstAlbums,
     fetchAllAlbums,
     fetchAlbumById,
     fetchArtistNames,
-    handleDeleteAlbum
+    handleDeleteAlbum,
+    createAlbum,
+    updateAlbum
   };
 
   return <AlbumContext.Provider value={values}>{props.children}</AlbumContext.Provider>;

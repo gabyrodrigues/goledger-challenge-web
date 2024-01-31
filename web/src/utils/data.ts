@@ -1,3 +1,5 @@
+export type AssetType = "artist" | "album" | "playlist" | "song";
+
 export interface IdRef {
   "@assetType": string;
   "@key": string;
@@ -36,7 +38,13 @@ export interface Playlist {
 export interface ArtistFormData extends Artist {
   "@assetType": "artist";
 }
-
 export interface EmptyFormArtist extends Partial<ArtistFormData> {}
 export interface CreateAnArtist extends Omit<Artist, "@key"> {}
 export interface UpdateAnArtist extends Partial<ArtistFormData> {}
+
+export interface AlbumFormData extends Omit<Album, "songs"> {
+  "@assetType": "album";
+}
+export interface EmptyFormAlbum extends Partial<AlbumFormData> {}
+export interface CreateAnAlbum extends Omit<Album, "@key" | "songs"> {}
+export interface UpdateAnAlbum extends Partial<AlbumFormData> {}

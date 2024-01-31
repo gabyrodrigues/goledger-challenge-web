@@ -1,6 +1,7 @@
 "use client";
 import { useContext } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ActionIcon, Flex, Group, Menu, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDotsVertical, IconPlayerPlayFilled } from "@tabler/icons-react";
@@ -11,6 +12,7 @@ import { DeleteModal } from "../DeleteModal";
 interface AlbumProps extends Pick<AlbumItem, "id" | "title"> {}
 
 export function Album({ id, title }: AlbumProps) {
+  const router = useRouter();
   const [opened, { close, open }] = useDisclosure(false);
   const { handleDeleteAlbum } = useContext(AlbumContext);
 
@@ -58,8 +60,10 @@ export function Album({ id, title }: AlbumProps) {
                       dropdown: "bg-darkGray text-white"
                     }}>
                     <Menu.Item
-                      component={Link}
-                      href="/">
+                      onClick={(e) => {
+                        e.preventDefault();
+                        router.replace(`/albums/update/${id}`);
+                      }}>
                       Update Album
                     </Menu.Item>
                     <Menu.Item

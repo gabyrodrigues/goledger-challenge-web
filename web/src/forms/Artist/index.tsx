@@ -8,7 +8,6 @@ import { ArtistFormData, CreateAnArtist, UpdateAnArtist } from "@/utils/data";
 import { ArtistFormProvider, useArtistForm } from "@/contexts/ArtistFormContext";
 import { ArtistContext } from "@/contexts/ArtistContext";
 import createArtistSchema from "./createArtistSchema";
-import { handleTransformSubmittedValues } from "./formatters";
 import { getDirtyValues } from "@/utils/transfomData";
 
 export function ArtistForm() {
@@ -20,8 +19,7 @@ export function ArtistForm() {
   const isCreateForm = pathname == "/artists/new";
   const form = useArtistForm({
     initialValues: { ...(activeArtist as ArtistFormData) },
-    validate: joiResolver(createArtistSchema()),
-    transformValues: (values: ArtistFormData) => handleTransformSubmittedValues(values)
+    validate: joiResolver(createArtistSchema())
   });
   const formHasErrors = Object.keys(form.errors).length !== 0;
 
@@ -121,12 +119,14 @@ export function ArtistForm() {
           gap="lg">
           <TextInput
             {...form.getInputProps("name")}
-            label="Artist name"
+            label="Name"
+            placeholder="Artist name"
             className="flex-grow"
           />
           <Textarea
             {...form.getInputProps("about")}
             label="About"
+            placeholder="Make a description a about the artist"
             className="basis-full"
           />
 
