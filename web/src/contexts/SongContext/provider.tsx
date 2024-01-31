@@ -2,8 +2,9 @@
 import { useCallback, useState } from "react";
 
 import { SongContext, SongItem } from ".";
-import { Playlist, Song } from "@/utils/data";
+import { CreateASong, Playlist, Song, UpdateASong } from "@/utils/data";
 import api from "@/services/api";
+import { EMPTY_SONG } from "@/forms/Song/emptySong";
 
 interface SongContextProviderProps {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ interface SongContextProviderProps {
 export default function SongContextProvider(props: SongContextProviderProps) {
   const [songs, setSongs] = useState<SongItem[]>([]);
   const [song, setSong] = useState<SongItem | null>(null);
+  const [activeSong, setActiveSong] = useState(EMPTY_SONG);
 
   async function handleSongsWithRefs(songsData: Song[]): Promise<SongItem[]> {
     const songsWithRefs = await Promise.all(
@@ -103,8 +105,8 @@ export default function SongContextProvider(props: SongContextProviderProps) {
       });
       const songsData = response.data.result;
       const songWithRefs = await handleSongsWithRefs(songsData);
-
       setSong(songWithRefs[0]);
+      setActiveSong(songsData[0]);
     } catch (error) {
       setSong(null);
       console.error(error);
@@ -173,13 +175,48 @@ export default function SongContextProvider(props: SongContextProviderProps) {
     }
   }
 
+  async function createSong(values: CreateASong) {
+    console.log("createSong", values);
+    try {
+      await api.post("invoke/createAsset", {
+        asset: [
+          {
+            ...values
+          }
+        ]
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function updateSong(songId: string, values: UpdateASong) {
+    console.log("updateSong", values);
+    try {
+      await api.post("invoke/updateAsset", {
+        update: {
+          "@assetType": "song",
+          "@key": songId,
+          ...values
+        }
+      });
+      setActiveSong(EMPTY_SONG);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const values = {
     songs,
     song,
+    activeSong,
+    setActiveSong,
     fetchFirstSongs,
     fetchAllSongs,
     fetchSongById,
-    handleDeleteSong
+    handleDeleteSong,
+    createSong,
+    updateSong
   };
 
   return <SongContext.Provider value={values}>{props.children}</SongContext.Provider>;

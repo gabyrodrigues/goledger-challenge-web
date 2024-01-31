@@ -1,15 +1,18 @@
 "use client";
 import { useContext } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ActionIcon, Flex, Group, Menu, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDotsVertical, IconExplicit, IconPlayerPlayFilled } from "@tabler/icons-react";
+
 import { SongContext, SongItem } from "@/contexts/SongContext";
 import { DeleteModal } from "../DeleteModal";
 
 interface SongProps extends Omit<SongItem, "songs" | "album"> {}
 
 export function Song({ id, title, artists, explicit }: SongProps) {
+  const router = useRouter();
   const [opened, { close, open }] = useDisclosure(false);
   const { handleDeleteSong } = useContext(SongContext);
 
@@ -60,8 +63,10 @@ export function Song({ id, title, artists, explicit }: SongProps) {
                 dropdown: "bg-darkGray text-white"
               }}>
               <Menu.Item
-                component={Link}
-                href="/">
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.replace(`/songs/update/${id}`);
+                }}>
                 Update Song
               </Menu.Item>
               <Menu.Item

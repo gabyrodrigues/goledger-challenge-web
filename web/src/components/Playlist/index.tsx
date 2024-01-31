@@ -1,6 +1,7 @@
 "use client";
 import { useContext } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ActionIcon, Flex, Group, Menu, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDotsVertical, IconPlayerPlayFilled } from "@tabler/icons-react";
@@ -11,6 +12,7 @@ import { DeleteModal } from "../DeleteModal";
 export interface PlaylistProps extends Pick<PlaylistItem, "id" | "name"> {}
 
 export function Playlist({ id, name }: PlaylistProps) {
+  const router = useRouter();
   const [opened, { close, open }] = useDisclosure(false);
   const { handleDeletePlaylist } = useContext(PlaylistContext);
 
@@ -52,8 +54,10 @@ export function Playlist({ id, name }: PlaylistProps) {
                       dropdown: "bg-darkGray text-white"
                     }}>
                     <Menu.Item
-                      component={Link}
-                      href="/">
+                      onClick={(e) => {
+                        e.preventDefault();
+                        router.replace(`/albums/update/${id}`);
+                      }}>
                       Update Playlist
                     </Menu.Item>
                     <Menu.Item

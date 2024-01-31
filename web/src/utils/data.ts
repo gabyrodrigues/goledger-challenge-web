@@ -17,7 +17,7 @@ export interface Album {
   "@key": string;
   title: string;
   artist: IdRef;
-  rating: number;
+  rating: number | null;
   releaseDate: string;
   songs: IdRef[];
 }
@@ -48,3 +48,10 @@ export interface AlbumFormData extends Omit<Album, "songs"> {
 export interface EmptyFormAlbum extends Partial<AlbumFormData> {}
 export interface CreateAnAlbum extends Omit<Album, "@key" | "songs"> {}
 export interface UpdateAnAlbum extends Partial<AlbumFormData> {}
+
+export interface SongFormData extends Song {
+  "@assetType": "song";
+}
+export interface EmptyFormSong extends Partial<SongFormData> {}
+export interface CreateASong extends Omit<Song, "@key"> {}
+export interface UpdateASong extends Partial<SongFormData> {}

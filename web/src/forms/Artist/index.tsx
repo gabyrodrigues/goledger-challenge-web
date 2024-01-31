@@ -98,7 +98,7 @@ export function ArtistForm() {
 
     notifications.show({
       autoClose: 3000,
-      message: "It was not possible to create! Please try again.",
+      message: "An error has ocurred! Please, check your data and try again.",
       color: "red"
     });
   }

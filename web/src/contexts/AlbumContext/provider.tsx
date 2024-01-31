@@ -51,7 +51,7 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
         id: album["@key"],
         title: album.title,
         artist: album.artist["@key"],
-        rating: album.rating,
+        rating: album.rating ?? null,
         releaseDate: album.releaseDate
       };
     });

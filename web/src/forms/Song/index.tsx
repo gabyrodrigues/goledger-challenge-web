@@ -3,29 +3,29 @@ import { usePathname, useRouter } from "next/navigation";
 import { notifications } from "@mantine/notifications";
 import { joiResolver } from "@mantine/form";
 
-import { AlbumFormData, CreateAnAlbum, UpdateAnAlbum } from "@/utils/data";
-import { AlbumFormProvider, useAlbumForm } from "@/contexts/AlbumFormContext";
-import { AlbumContext } from "@/contexts/AlbumContext";
+import { SongFormData, CreateASong, UpdateASong } from "@/utils/data";
+import { SongFormProvider, useSongForm } from "@/contexts/SongFormContext";
 import { getDirtyValues } from "@/utils/transfomData";
-import createAlbumSchema from "./createAlbumSchema";
-import { handleFormatCreateAlbum, handleTransformSubmittedValues } from "./formatters";
+import { SongContext } from "@/contexts/SongContext";
+import createSongSchema from "./createSongSchema";
+import { handleFormatCreateSong, handleTransformSubmittedValues } from "./formatters";
 import { FormFields } from "./FormFields";
 
-export function AlbumForm() {
+export function SongForm() {
   const pathname = usePathname();
   const router = useRouter();
   const submitRef = useRef<HTMLButtonElement | null>(null);
-  const { activeAlbum, createAlbum, updateAlbum } = useContext(AlbumContext);
+  const { activeSong, createSong, updateSong } = useContext(SongContext);
 
-  const isCreateForm = pathname == "/albums/new";
-  const form = useAlbumForm({
-    initialValues: { ...(activeAlbum as AlbumFormData) },
-    validate: joiResolver(createAlbumSchema()),
-    transformValues: (values: AlbumFormData) => handleTransformSubmittedValues(values)
+  const isCreateForm = pathname == "/songs/new";
+  const form = useSongForm({
+    initialValues: { ...(activeSong as SongFormData) },
+    validate: joiResolver(createSongSchema()),
+    transformValues: (values: SongFormData) => handleTransformSubmittedValues(values)
   });
   const formHasErrors = Object.keys(form.errors).length !== 0;
 
-  function handleFormSubmit(values: AlbumFormData) {
+  function handleFormSubmit(values: SongFormData) {
     if (submitRef.current) {
       submitRef.current.disabled = true;
     }
@@ -37,19 +37,19 @@ export function AlbumForm() {
     }
   }
 
-  async function handleFormCreate(values: AlbumFormData) {
+  async function handleFormCreate(values: SongFormData) {
     try {
-      const createValues = handleFormatCreateAlbum(values);
+      const createValues = handleFormatCreateSong(values);
 
-      await createAlbum(createValues as CreateAnAlbum);
+      await createSong(createValues as CreateASong);
 
       notifications.show({
         autoClose: 3000,
-        message: "Album created successfully!",
+        message: "Song created successfully!",
         color: "green"
       });
 
-      router.push("/albums");
+      router.push("/songs");
     } catch (error) {
       console.error(error);
       notifications.show({
@@ -64,19 +64,19 @@ export function AlbumForm() {
     }
   }
 
-  async function handleFormUpdate(values: AlbumFormData) {
-    const updateValues = getDirtyValues<AlbumFormData>(values, form);
+  async function handleFormUpdate(values: SongFormData) {
+    const updateValues = getDirtyValues<SongFormData>(values, form);
     console.log("update", values);
     try {
-      await updateAlbum(values["@key"], updateValues as UpdateAnAlbum);
+      await updateSong(values["@key"], updateValues as UpdateASong);
 
       notifications.show({
         autoClose: 3000,
-        message: "Album updated successfully!",
+        message: "Song updated successfully!",
         color: "green"
       });
 
-      router.push("/albums");
+      router.push("/songs");
     } catch (error) {
       console.error(error);
       notifications.show({
@@ -102,7 +102,7 @@ export function AlbumForm() {
   }
 
   return (
-    <AlbumFormProvider form={form}>
+    <SongFormProvider form={form}>
       <FormFields
         form={form}
         handleFormSubmit={handleFormSubmit}
@@ -110,6 +110,6 @@ export function AlbumForm() {
         formHasErrors={formHasErrors}
         submitRef={submitRef}
       />
-    </AlbumFormProvider>
+    </SongFormProvider>
   );
 }

@@ -18,12 +18,9 @@ interface AlbumProps {
   updateAlbum: (artistId: string, values: UpdateAnAlbum) => Promise<void>;
 }
 
-export interface AlbumItem {
+export interface AlbumItem extends Omit<Album, "songs" | "@key" | "artist"> {
   id: string;
-  title: string;
   artist: string;
-  rating: number;
-  releaseDate: string;
 }
 
 export const AlbumContext = createContext({} as AlbumProps);

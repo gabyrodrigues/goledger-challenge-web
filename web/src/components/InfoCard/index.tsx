@@ -1,6 +1,5 @@
 "use client";
 import { useContext } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ActionIcon, Flex, Group, Menu, Stack, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -122,8 +121,10 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   dropdown: "bg-darkGray text-white"
                 }}>
                 <Menu.Item
-                  component={Link}
-                  href="/">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.replace(`/songs/update/${song!.id}`);
+                  }}>
                   Update Song
                 </Menu.Item>
                 <Menu.Item
@@ -238,8 +239,10 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                   dropdown: "bg-darkGray text-white"
                 }}>
                 <Menu.Item
-                  component={Link}
-                  href="/">
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.replace(`/playlists/update/${playlist!.id}`);
+                  }}>
                   Update Playlist
                 </Menu.Item>
                 <Menu.Item

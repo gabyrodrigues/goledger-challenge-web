@@ -9,5 +9,5 @@ export const EMPTY_ALBUM: EmptyFormAlbum = {
     "@key": ""
   },
   releaseDate: "",
-  rating: 10
+  rating: null
 };

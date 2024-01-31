@@ -12,9 +12,9 @@ export default function createArtistSchema(): Joi.ObjectSchema<ArtistFormData> {
       "string.min": "Name must be at least two characters long",
       "string.empty": "Required field"
     }),
-    about: Joi.string().min(2).trim().messages({
-      "string.min": "About must be at least 10 characters long",
-      "string.empty": "Required field"
+    about: Joi.string().trim().empty("").messages({
+      "string.base": "Invalid value",
+      "string.min": "Invalid value"
     })
   }).options({ abortEarly: false });
 }

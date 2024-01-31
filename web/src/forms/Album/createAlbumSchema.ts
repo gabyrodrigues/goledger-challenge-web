@@ -29,9 +29,8 @@ export default function createAlbumSchema(): Joi.ObjectSchema<AlbumFormData> {
       "date.less": "Invalid date",
       "date.empty": "Required field"
     }),
-    rating: Joi.number().min(1).max(10).required().messages({
+    rating: Joi.number().integer().min(1).max(10).allow(null).optional().messages({
       "number.base": "Required field",
-      "any.required": "Required field",
       "number.min": "Rating needs to be 1-10",
       "number.max": "Rating needs to be 1-10"
     })
