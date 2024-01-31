@@ -1,12 +1,5 @@
 import { AlbumFormData } from "@/utils/data";
 
-export function handleTransformSubmittedValues(values: AlbumFormData) {
-  const transformedValues = {
-    ...values
-  };
-  return transformedValues;
-}
-
 export function handleFormatCreateAlbum(values: AlbumFormData) {
   const transformedValues = {
     "@assetType": "album",

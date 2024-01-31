@@ -2,8 +2,9 @@
 import { useCallback, useContext, useState } from "react";
 
 import { PlaylistContext, PlaylistItem } from ".";
-import { Playlist, Song } from "@/utils/data";
+import { CreateAPlaylist, Playlist, Song, UpdateAPlaylist } from "@/utils/data";
 import api from "@/services/api";
+import { EMPTY_PLAYLIST } from "@/forms/Playlist/emptyPlaylist";
 import { AlbumContext } from "../AlbumContext";
 
 interface PlaylistContextProviderProps {
@@ -13,6 +14,7 @@ interface PlaylistContextProviderProps {
 export default function PlaylistContextProvider(props: PlaylistContextProviderProps) {
   const [playlists, setPlaylists] = useState<PlaylistItem[]>([]);
   const [playlist, setPlaylist] = useState<PlaylistItem | null>(null);
+  const [activePlaylist, setActivePlaylist] = useState(EMPTY_PLAYLIST);
   const { fetchArtistNames } = useContext(AlbumContext);
 
   async function handlePlaylistsData(playlistsData: Playlist[]): Promise<PlaylistItem[]> {
@@ -118,6 +120,7 @@ export default function PlaylistContextProvider(props: PlaylistContextProviderPr
         const playlistsWithSongs = await handlePlaylistWithSongs(playlistsData[0]);
 
         setPlaylist(playlistsWithSongs);
+        setActivePlaylist(playlistsData[0]);
       } catch (error) {
         setPlaylist(null);
         console.error(error);
@@ -142,13 +145,46 @@ export default function PlaylistContextProvider(props: PlaylistContextProviderPr
     }
   }
 
+  async function createPlaylist(values: CreateAPlaylist) {
+    try {
+      await api.post("invoke/createAsset", {
+        asset: [
+          {
+            ...values
+          }
+        ]
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function updatePlaylist(playlistId: string, values: UpdateAPlaylist) {
+    try {
+      await api.post("invoke/updateAsset", {
+        update: {
+          "@assetType": "playlist",
+          "@key": playlistId,
+          ...values
+        }
+      });
+      setActivePlaylist(EMPTY_PLAYLIST);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const values = {
     playlists,
     playlist,
+    activePlaylist,
+    setActivePlaylist,
     fetchFirstPlaylists,
     fetchAllPlaylists,
     fetchPlaylistById,
-    handleDeletePlaylist
+    handleDeletePlaylist,
+    createPlaylist,
+    updatePlaylist
   };
 
   return <PlaylistContext.Provider value={values}>{props.children}</PlaylistContext.Provider>;

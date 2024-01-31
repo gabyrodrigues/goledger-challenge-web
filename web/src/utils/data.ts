@@ -55,3 +55,10 @@ export interface SongFormData extends Song {
 export interface EmptyFormSong extends Partial<SongFormData> {}
 export interface CreateASong extends Omit<Song, "@key"> {}
 export interface UpdateASong extends Partial<SongFormData> {}
+
+export interface PlaylistFormData extends Playlist {
+  "@assetType": "playlist";
+}
+export interface EmptyFormPlaylist extends Partial<PlaylistFormData> {}
+export interface CreateAPlaylist extends Omit<Playlist, "@key"> {}
+export interface UpdateAPlaylist extends Partial<PlaylistFormData> {}

@@ -68,7 +68,6 @@ export function ArtistForm() {
 
   async function handleFormUpdate(values: ArtistFormData) {
     const updateValues = getDirtyValues<ArtistFormData>(values, form);
-    console.log("update", values);
     try {
       await updateArtist(values["@key"], updateValues as UpdateAnArtist);
 
@@ -101,6 +100,9 @@ export function ArtistForm() {
       message: "An error has ocurred! Please, check your data and try again.",
       color: "red"
     });
+    if (submitRef.current) {
+      submitRef.current.disabled = false;
+    }
   }
 
   return (
@@ -126,7 +128,7 @@ export function ArtistForm() {
           <Textarea
             {...form.getInputProps("about")}
             label="About"
-            placeholder="Make a description a about the artist"
+            placeholder="Make a description about the artist"
             className="basis-full"
           />
 

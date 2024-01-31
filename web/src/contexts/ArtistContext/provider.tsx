@@ -220,7 +220,6 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
   }
 
   async function updateArtist(artistId: string, values: UpdateAnArtist) {
-    console.log("updateArtist", values);
     try {
       await api.post("invoke/updateAsset", {
         update: {

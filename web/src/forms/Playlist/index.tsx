@@ -3,28 +3,28 @@ import { usePathname, useRouter } from "next/navigation";
 import { notifications } from "@mantine/notifications";
 import { joiResolver } from "@mantine/form";
 
-import { SongFormData, CreateASong, UpdateASong } from "@/utils/data";
-import { SongFormProvider, useSongForm } from "@/contexts/SongFormContext";
+import { PlaylistFormData, CreateAPlaylist, UpdateAPlaylist } from "@/utils/data";
+import { PlaylistFormProvider, usePlaylistForm } from "@/contexts/PlaylistFormContext";
 import { getDirtyValues } from "@/utils/transfomData";
-import { SongContext } from "@/contexts/SongContext";
-import createSongSchema from "./createSongSchema";
-import { handleFormatCreateSong } from "./formatters";
+import { PlaylistContext } from "@/contexts/PlaylistContext";
+import createPlaylistSchema from "./createPlaylistSchema";
+import { handleFormatCreatePlaylist } from "./formatters";
 import { FormFields } from "./FormFields";
 
-export function SongForm() {
+export function PlaylistForm() {
   const pathname = usePathname();
   const router = useRouter();
   const submitRef = useRef<HTMLButtonElement | null>(null);
-  const { activeSong, createSong, updateSong } = useContext(SongContext);
+  const { activePlaylist, createPlaylist, updatePlaylist } = useContext(PlaylistContext);
 
-  const isCreateForm = pathname == "/songs/new";
-  const form = useSongForm({
-    initialValues: { ...(activeSong as SongFormData) },
-    validate: joiResolver(createSongSchema())
+  const isCreateForm = pathname == "/playlists/new";
+  const form = usePlaylistForm({
+    initialValues: { ...(activePlaylist as PlaylistFormData) },
+    validate: joiResolver(createPlaylistSchema())
   });
   const formHasErrors = Object.keys(form.errors).length !== 0;
 
-  function handleFormSubmit(values: SongFormData) {
+  function handleFormSubmit(values: PlaylistFormData) {
     if (submitRef.current) {
       submitRef.current.disabled = true;
     }
@@ -36,19 +36,19 @@ export function SongForm() {
     }
   }
 
-  async function handleFormCreate(values: SongFormData) {
+  async function handleFormCreate(values: PlaylistFormData) {
     try {
-      const createValues = handleFormatCreateSong(values);
+      const createValues = handleFormatCreatePlaylist(values);
 
-      await createSong(createValues as CreateASong);
+      await createPlaylist(createValues as CreateAPlaylist);
 
       notifications.show({
         autoClose: 3000,
-        message: "Song created successfully!",
+        message: "Playlist created successfully!",
         color: "green"
       });
 
-      router.push("/songs");
+      router.push("/playlists");
     } catch (error) {
       console.error(error);
       notifications.show({
@@ -63,18 +63,18 @@ export function SongForm() {
     }
   }
 
-  async function handleFormUpdate(values: SongFormData) {
-    const updateValues = getDirtyValues<SongFormData>(values, form);
+  async function handleFormUpdate(values: PlaylistFormData) {
+    const updateValues = getDirtyValues<PlaylistFormData>(values, form);
     try {
-      await updateSong(values["@key"], updateValues as UpdateASong);
+      await updatePlaylist(values["@key"], updateValues as UpdateAPlaylist);
 
       notifications.show({
         autoClose: 3000,
-        message: "Song updated successfully!",
+        message: "Playlist updated successfully!",
         color: "green"
       });
 
-      router.push("/songs");
+      router.push("/playlists");
     } catch (error) {
       console.error(error);
       notifications.show({
@@ -103,7 +103,7 @@ export function SongForm() {
   }
 
   return (
-    <SongFormProvider form={form}>
+    <PlaylistFormProvider form={form}>
       <FormFields
         form={form}
         handleFormSubmit={handleFormSubmit}
@@ -111,6 +111,6 @@ export function SongForm() {
         formHasErrors={formHasErrors}
         submitRef={submitRef}
       />
-    </SongFormProvider>
+    </PlaylistFormProvider>
   );
 }

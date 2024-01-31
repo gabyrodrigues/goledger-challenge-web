@@ -208,7 +208,6 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
   }
 
   async function createAlbum(values: CreateAnAlbum) {
-    console.log("createAlbum", values);
     try {
       await api.post("invoke/createAsset", {
         asset: [
@@ -223,7 +222,6 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
   }
 
   async function updateAlbum(albumId: string, values: UpdateAnAlbum) {
-    console.log("updateAlbum", values);
     try {
       await api.post("invoke/updateAsset", {
         update: {

@@ -56,7 +56,7 @@ export function Playlist({ id, name }: PlaylistProps) {
                     <Menu.Item
                       onClick={(e) => {
                         e.preventDefault();
-                        router.replace(`/albums/update/${id}`);
+                        router.replace(`/playlists/update/${id}`);
                       }}>
                       Update Playlist
                     </Menu.Item>

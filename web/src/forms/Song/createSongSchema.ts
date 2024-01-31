@@ -35,8 +35,8 @@ export default function createSongSchema(): Joi.ObjectSchema<SongFormData> {
       .required()
       .min(1)
       .messages({
-        "any.required": "Select at lest one artist",
-        "array.includes": "Select at lest one artist",
+        "any.required": "Select at least one artist",
+        "array.includes": "Select at least one artist",
         "array.min": "You need to add at least one artist"
       }),
     explicit: Joi.boolean().required().messages({

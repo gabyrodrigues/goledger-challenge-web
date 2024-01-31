@@ -8,7 +8,7 @@ import { AlbumFormProvider, useAlbumForm } from "@/contexts/AlbumFormContext";
 import { AlbumContext } from "@/contexts/AlbumContext";
 import { getDirtyValues } from "@/utils/transfomData";
 import createAlbumSchema from "./createAlbumSchema";
-import { handleFormatCreateAlbum, handleTransformSubmittedValues } from "./formatters";
+import { handleFormatCreateAlbum } from "./formatters";
 import { FormFields } from "./FormFields";
 
 export function AlbumForm() {
@@ -20,8 +20,7 @@ export function AlbumForm() {
   const isCreateForm = pathname == "/albums/new";
   const form = useAlbumForm({
     initialValues: { ...(activeAlbum as AlbumFormData) },
-    validate: joiResolver(createAlbumSchema()),
-    transformValues: (values: AlbumFormData) => handleTransformSubmittedValues(values)
+    validate: joiResolver(createAlbumSchema())
   });
   const formHasErrors = Object.keys(form.errors).length !== 0;
 
@@ -66,7 +65,6 @@ export function AlbumForm() {
 
   async function handleFormUpdate(values: AlbumFormData) {
     const updateValues = getDirtyValues<AlbumFormData>(values, form);
-    console.log("update", values);
     try {
       await updateAlbum(values["@key"], updateValues as UpdateAnAlbum);
 
@@ -99,6 +97,9 @@ export function AlbumForm() {
       message: "An error has ocurred! Please, check your data and try again.",
       color: "red"
     });
+    if (submitRef.current) {
+      submitRef.current.disabled = false;
+    }
   }
 
   return (

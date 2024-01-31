@@ -176,7 +176,6 @@ export default function SongContextProvider(props: SongContextProviderProps) {
   }
 
   async function createSong(values: CreateASong) {
-    console.log("createSong", values);
     try {
       await api.post("invoke/createAsset", {
         asset: [
@@ -191,7 +190,6 @@ export default function SongContextProvider(props: SongContextProviderProps) {
   }
 
   async function updateSong(songId: string, values: UpdateASong) {
-    console.log("updateSong", values);
     try {
       await api.post("invoke/updateAsset", {
         update: {

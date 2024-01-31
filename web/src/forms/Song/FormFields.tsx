@@ -51,7 +51,7 @@ export function FormFields({
       label: ""
     }
   ]);
-  const [selectedArtistIds, setSelectedArtistsId] = useState<string[]>([]);
+  const [selectedArtistsId, setSelectedArtistsId] = useState<string[]>([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState<string>("");
   const { artists } = useContext(ArtistContext);
   const { albums } = useContext(AlbumContext);
@@ -102,7 +102,6 @@ export function FormFields({
       });
     }
     form.setFieldValue("artists", artists);
-    console.log("artists selected", artists);
   }
 
   async function handleChangeAlbum(albumId: string | null) {
@@ -143,7 +142,7 @@ export function FormFields({
           limit={6}
           searchable
           nothingFoundMessage="Artist not found..."
-          value={selectedArtistIds}
+          value={selectedArtistsId}
           onChange={handleChangeArtists}
         />
         <Select
