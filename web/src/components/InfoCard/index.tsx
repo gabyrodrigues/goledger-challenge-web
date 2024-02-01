@@ -57,19 +57,21 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
     switch (type) {
       case "song":
         await handleDeleteSong(song!.id);
+        router.push("/songs");
         break;
       case "album":
         await handleDeleteAlbum(album!.id);
+        router.push("/albums");
         break;
       case "playlist":
         await handleDeletePlaylist(playlist!.id);
+        router.push("/playlists");
         break;
       case "artist":
         await handleDeleteArtist(playlist!.id);
+        router.push("/artists");
         break;
     }
-
-    router.push("/");
   }
 
   function renderCardIcon() {

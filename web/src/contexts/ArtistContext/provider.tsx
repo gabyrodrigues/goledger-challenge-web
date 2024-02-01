@@ -200,6 +200,7 @@ export default function ArtistContextProvider(props: ArtistContextProviderProps)
 
       const filteredList = artists.filter((artist) => artist.id !== artistId);
       setArtists(filteredList);
+      setActiveArtist(EMPTY_ARTIST);
     } catch (error) {
       console.error(error);
     }

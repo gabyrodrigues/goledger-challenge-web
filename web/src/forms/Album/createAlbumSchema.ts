@@ -1,8 +1,8 @@
 import { AlbumFormData } from "@/utils/data";
 import Joi from "joi";
 
-const yesterday = new Date();
-yesterday.setDate(yesterday.getDate() - 1);
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 export default function createAlbumSchema(): Joi.ObjectSchema<AlbumFormData> {
   return Joi.object({
@@ -23,10 +23,10 @@ export default function createAlbumSchema(): Joi.ObjectSchema<AlbumFormData> {
         "string.empty": "Required field"
       })
     }),
-    releaseDate: Joi.date().less(yesterday).required().messages({
+    releaseDate: Joi.date().max(today).required().messages({
       "any.required": "Required field",
       "date.base": "Invalid date",
-      "date.less": "Invalid date",
+      "date.max": "Release date cannot be in the future",
       "date.empty": "Required field"
     }),
     rating: Joi.number().integer().min(1).max(10).allow(null).optional().messages({

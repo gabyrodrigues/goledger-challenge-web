@@ -1,7 +1,7 @@
 ![React Avançado](https://raw.githubusercontent.com/React-Avancado/boilerplate/master/public/img/logo-gh.svg)
 
 This is a [Next.js](https://nextjs.org/) boilerplate to be used in a course called [React Avançado](https://reactavancado.com.br/) but using Tailwind CSS instead of Styled Components.
-![ci](https://github.com/React-Avancado/boilerplate/workflows/ci/badge.svg)
+![ci](https://github.com/React-Avancado/boilerplate/workflows/ci/badge.svg) [Figma](https://www.figma.com/file/5ckeYEVARTGtidz7KuhumM/Music-Streaming-App?type=design&node-id=6%3A5&mode=design&t=JOFpf6FB4qMTOKBX-1)
 
 ## What is inside?
 

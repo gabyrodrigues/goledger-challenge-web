@@ -77,6 +77,7 @@ export function FormFields({
     handleFilterArtists();
     handleInitialValues();
   }, [handleFilterArtists, handleInitialValues]);
+
   return (
     <form
       onSubmit={form.onSubmit(

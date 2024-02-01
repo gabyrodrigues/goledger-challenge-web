@@ -1,4 +1,5 @@
 import { EmptyFormAlbum } from "@/utils/data";
+import dayjs from "dayjs";
 
 export const EMPTY_ALBUM: EmptyFormAlbum = {
   "@key": "",
@@ -8,6 +9,6 @@ export const EMPTY_ALBUM: EmptyFormAlbum = {
     "@assetType": "artist",
     "@key": ""
   },
-  releaseDate: "",
+  releaseDate: dayjs().startOf("day").format(),
   rating: null
 };

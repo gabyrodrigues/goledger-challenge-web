@@ -202,6 +202,7 @@ export default function AlbumContextProvider(props: AlbumContextProviderProps) {
 
       const filteredList = albums.filter((album) => album.id !== albumId);
       setAlbums(filteredList);
+      setActiveAlbum(EMPTY_ALBUM);
     } catch (error) {
       console.error(error);
     }
