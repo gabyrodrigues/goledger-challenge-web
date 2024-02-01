@@ -1,6 +1,10 @@
 # 📝 Music Studio Web  
 Music Studio is a streaming web interface connected to a blockchain app. Using the application developed in Next.js, it is possible to view, edit, create and delete streaming content, such as songs, artists, albums and playlists.
 
+## 👩‍💻 Figma
+
+You can access the main interface prototype and also its visual identity in [Figma](https://www.figma.com/file/5ckeYEVARTGtidz7KuhumM/Music-Streaming-App?type=design&node-id=6%3A5&mode=design&t=XKQ2Qi44ziGLTRuI-1).
+
 ## 👩‍💻 Technologies
 
 This project uses lot of stuff as:
