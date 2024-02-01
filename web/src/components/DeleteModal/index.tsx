@@ -42,17 +42,10 @@ export function DeleteModal({ opened, close, onDelete }: DeleteModalProps): JSX.
         <Text
           fw="bold"
           fz="xl"
-          classNames={{
-            root: "text-gray-600"
-          }}>
+          c="gray.0">
           Are you sure you want to delete it?
         </Text>
-        <Text
-          classNames={{
-            root: "text-gray-600"
-          }}>
-          All of its possible related contents may also be deleted.
-        </Text>
+        <Text c="gray.0">All of its possible related contents may also be deleted.</Text>
 
         <Group mt={32}>
           <Button
@@ -61,10 +54,7 @@ export function DeleteModal({ opened, close, onDelete }: DeleteModalProps): JSX.
             onClick={close}
             leftSection={<IconArrowBackUp size="24" />}
             fw="bold"
-            radius="md"
-            classNames={{
-              root: "text-primary border-lightGray hover:bg-primary hover:text-white hover:border-primary"
-            }}>
+            radius="md">
             Cancel
           </Button>
           <Button
@@ -73,10 +63,7 @@ export function DeleteModal({ opened, close, onDelete }: DeleteModalProps): JSX.
             onClick={handleDelete}
             leftSection={<IconExclamationCircle size={24} />}
             radius="md"
-            fw="bold"
-            classNames={{
-              root: "text-white bg-primary hover:bg-darkPrimary hover:text-white"
-            }}>
+            fw="bold">
             Confirm
           </Button>
         </Group>

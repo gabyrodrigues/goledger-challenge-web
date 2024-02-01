@@ -19,8 +19,10 @@ export function AlbumsSection({ items, linkUrl }: AlbumsSectionProps) {
       {items.length ? (
         <SimpleGrid
           cols={6}
-          classNames={{
-            root: "items-start"
+          styles={{
+            root: {
+              alignItems: "flex-start"
+            }
           }}>
           {items.map((item) => (
             <Album
@@ -34,9 +36,7 @@ export function AlbumsSection({ items, linkUrl }: AlbumsSectionProps) {
         <Text
           fs="italic"
           ta="center"
-          classNames={{
-            root: "text-lightGray"
-          }}>
+          c="dark.2">
           No albums to display.
         </Text>
       )}

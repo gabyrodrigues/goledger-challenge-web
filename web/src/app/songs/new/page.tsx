@@ -35,7 +35,11 @@ export default function NewSong() {
         </Flex>
       ) : (
         <Stack gap={32}>
-          <Title order={1}>Create New Song</Title>
+          <Title
+            order={1}
+            c="gray.0">
+            Create New Song
+          </Title>
           <SongForm />
         </Stack>
       )}

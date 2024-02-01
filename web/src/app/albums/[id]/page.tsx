@@ -39,9 +39,7 @@ export default function AlbumId() {
         <Text
           fs="italic"
           ta="center"
-          classNames={{
-            root: "text-lightGray"
-          }}>
+          c="dark.2">
           No album songs to display.
         </Text>
       )}

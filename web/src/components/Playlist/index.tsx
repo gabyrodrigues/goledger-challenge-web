@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ActionIcon, Flex, Group, Menu, Text } from "@mantine/core";
+import { ActionIcon, Flex, Group, Menu, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDotsVertical, IconPlayerPlayFilled } from "@tabler/icons-react";
 
@@ -21,8 +21,7 @@ export function Playlist({ id, name }: PlaylistProps) {
       <Flex
         justify="space-between"
         align="center"
-        p={1}
-        classNames={{ root: "w-min rounded hover:bg-darkGray" }}>
+        p={1}>
         <Link href={`/playlists/${id}`}>
           <Flex align="center">
             <Group>
@@ -31,28 +30,31 @@ export function Playlist({ id, name }: PlaylistProps) {
                 pos="relative"
                 w={160}
                 h={160}
-                align="center"
-                classNames={{ root: "bg-gray text-white" }}>
-                <IconPlayerPlayFilled size={64} />
+                c="gray.0"
+                bg="dark.6"
+                align="center">
+                <IconPlayerPlayFilled
+                  color="gray.0"
+                  size={64}
+                />
 
                 <Menu width={200}>
                   <Menu.Target>
                     <ActionIcon
+                      variant="subtle"
                       radius="xl"
                       p={3}
                       pos="absolute"
-                      right={2}
-                      top={2}
-                      classNames={{ root: "bg-transparent hover:bg-lightGray hover:bg-opacity-50" }}
+                      right={8}
+                      top={8}
                       onClick={(e) => e.preventDefault()}>
                       <IconDotsVertical size={24} />
                     </ActionIcon>
                   </Menu.Target>
 
                   <Menu.Dropdown
-                    classNames={{
-                      dropdown: "bg-darkGray text-white"
-                    }}>
+                    bg="dark.8"
+                    color="gray.0">
                     <Menu.Item
                       onClick={(e) => {
                         e.preventDefault();
@@ -61,24 +63,23 @@ export function Playlist({ id, name }: PlaylistProps) {
                       Update Playlist
                     </Menu.Item>
                     <Menu.Item
+                      c="red.6"
                       onClick={(e) => {
                         e.preventDefault();
                         open();
-                      }}
-                      classNames={{
-                        item: "text-red-400 hover:bg-neutral-700"
                       }}>
                       Delete Playlist
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
               </Flex>
-              <Text
-                fz="xl"
-                fw="bold"
-                classNames={{ root: "text-white line-clamp-2" }}>
+              <Title
+                order={3}
+                lineClamp={2}
+                c="gray.0"
+                fw="bold">
                 {name}
-              </Text>
+              </Title>
             </Group>
           </Flex>
         </Link>

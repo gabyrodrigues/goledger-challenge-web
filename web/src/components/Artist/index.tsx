@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
 import Link from "next/link";
-import { ActionIcon, Flex, Group, Menu, Text } from "@mantine/core";
+import { ActionIcon, Flex, Group, Menu, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDotsVertical, IconUserFilled } from "@tabler/icons-react";
 
@@ -21,10 +21,7 @@ export function Artist({ id, name }: ArtistProps) {
       <Flex
         align="center"
         justify="space-between"
-        p={1}
-        classNames={{
-          root: " w-min p-1 rounded hover:bg-darkGray"
-        }}>
+        p={1}>
         <Link href={`/artists/${id}`}>
           <Flex align="center">
             <Group>
@@ -34,30 +31,35 @@ export function Artist({ id, name }: ArtistProps) {
                 align="center"
                 justify="center"
                 pos="relative"
-                classNames={{
-                  root: "bg-gray text-white rounded-full"
+                c="gray.0"
+                bg="dark.6"
+                styles={{
+                  root: {
+                    borderRadius: "50%"
+                  }
                 }}>
-                <IconUserFilled size={64} />
+                <IconUserFilled
+                  color="gray.0"
+                  size={64}
+                />
 
                 <Menu width={200}>
                   <Menu.Target>
                     <ActionIcon
+                      variant="subtle"
                       p={3}
                       pos="absolute"
-                      right={2}
+                      right={8}
                       top="50%"
-                      classNames={{
-                        root: "bg-transparent rounded-full hover:bg-lightGray hover:bg-opacity-50"
-                      }}
+                      radius="xl"
                       onClick={(e) => e.preventDefault()}>
                       <IconDotsVertical size={24} />
                     </ActionIcon>
                   </Menu.Target>
 
                   <Menu.Dropdown
-                    classNames={{
-                      dropdown: "bg-darkGray text-white"
-                    }}>
+                    bg="dark.8"
+                    color="gray.0">
                     <Menu.Item
                       onClick={(e) => {
                         e.preventDefault();
@@ -66,26 +68,25 @@ export function Artist({ id, name }: ArtistProps) {
                       Update Artist
                     </Menu.Item>
                     <Menu.Item
+                      c="red.6"
                       onClick={(e) => {
                         e.preventDefault();
                         open();
-                      }}
-                      classNames={{
-                        item: "text-red-400 hover:bg-neutral-700"
                       }}>
                       Delete Artist
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
               </Flex>
-              <Text
-                fz="xl"
+              <Title
+                order={3}
+                lineClamp={2}
                 fw="bold"
                 ta="center"
                 w="100%"
-                classNames={{ root: "text-white line-clamp-2" }}>
+                c="gray.0">
                 {name}
-              </Text>
+              </Title>
             </Group>
           </Flex>
         </Link>

@@ -4,14 +4,14 @@ import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/dates/styles.css";
-import "./globals.css";
+import "@/styles/globals.css";
 
-import { ColorSchemeScript, Container, MantineProvider } from "@mantine/core";
+import { ColorSchemeScript, Container, MantineProvider, Stack } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 
 import { Shell } from "@/components/Shell";
-import { cn } from "@/utils";
 import { AppContexts } from "@/contexts/AppContexts";
+import { theme } from "@/styles/theme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,20 +32,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={cn("bg-background text-white", inter.className)}>
-        <MantineProvider defaultColorScheme="dark">
+      <body className={inter.className}>
+        <MantineProvider
+          theme={theme}
+          defaultColorScheme="dark">
           <Notifications />
           <AppContexts>
             <Shell>
               <Container
                 size="lg"
                 px={40}
-                py={64}
-                display="flex"
-                classNames={{
-                  root: "flex-col gap-8"
-                }}>
-                {children}
+                py={64}>
+                <Stack gap={32}>{children}</Stack>
               </Container>
             </Shell>
           </AppContexts>

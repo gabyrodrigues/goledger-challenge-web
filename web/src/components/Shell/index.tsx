@@ -1,11 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { AppShell, Stack, UnstyledButton } from "@mantine/core";
+import { AppShell, Stack, Button } from "@mantine/core";
 
 import logo from "@/assets/img/logo-full.svg";
 import { ActionsMenu } from "../ActionsMenu";
-
 interface ShellProps {
   children: React.ReactNode;
 }
@@ -14,12 +13,13 @@ export function Shell({ children }: ShellProps) {
   return (
     <AppShell
       navbar={{ width: 210, breakpoint: "sm" }}
-      padding="md">
+      padding="md"
+      bg="var(--mantine-color-dark-9)">
       <AppShell.Navbar
         withBorder={false}
         px={40}
         py={24}
-        bg="var(--mantine-color-dark-9)">
+        bg="var(--mantine-color-dark-8)">
         <Stack gap={20}>
           <Link href="/">
             <Image
@@ -30,38 +30,46 @@ export function Shell({ children }: ShellProps) {
             />
           </Link>
 
-          <UnstyledButton
+          <Button
+            variant="subtle"
             component={Link}
             href="/artists"
             fw="bold"
-            p={4}
-            classNames={{ root: "text-white rounded hover:bg-gray" }}>
+            fz="md"
+            justify="flex-start"
+            p={4}>
             Artists
-          </UnstyledButton>
-          <UnstyledButton
+          </Button>
+          <Button
+            variant="subtle"
             component={Link}
             href="/albums"
             fw="bold"
-            p={4}
-            classNames={{ root: "text-white rounded hover:bg-gray" }}>
+            fz="md"
+            justify="flex-start"
+            p={4}>
             Albums
-          </UnstyledButton>
-          <UnstyledButton
+          </Button>
+          <Button
+            variant="subtle"
             component={Link}
             href="/songs"
             fw="bold"
-            p={4}
-            classNames={{ root: "text-white rounded hover:bg-gray" }}>
+            fz="md"
+            justify="flex-start"
+            p={4}>
             Songs
-          </UnstyledButton>
-          <UnstyledButton
+          </Button>
+          <Button
+            variant="subtle"
             component={Link}
             href="/playlists"
             fw="bold"
-            p={4}
-            classNames={{ root: "text-white rounded hover:bg-gray" }}>
+            fz="md"
+            justify="flex-start"
+            p={4}>
             Playlists
-          </UnstyledButton>
+          </Button>
 
           <ActionsMenu />
         </Stack>

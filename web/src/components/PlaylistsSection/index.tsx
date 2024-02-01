@@ -21,7 +21,11 @@ export function PlaylistsSection({ items, linkUrl }: PlaylistsSectionProps) {
       {items.length ? (
         <SimpleGrid
           cols={6}
-          classNames={{ root: "items-start" }}>
+          styles={{
+            root: {
+              alignItems: "flex-start"
+            }
+          }}>
           {items.map((item) => (
             <Playlist
               key={item.id}
@@ -34,9 +38,7 @@ export function PlaylistsSection({ items, linkUrl }: PlaylistsSectionProps) {
         <Text
           fs="italic"
           ta="center"
-          classNames={{
-            root: "text-lightGray"
-          }}>
+          c="dark.2">
           No albums to display.
         </Text>
       )}

@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ActionIcon, Flex, Group, Menu, Stack, Text } from "@mantine/core";
+import { ActionIcon, Flex, Group, Menu, Stack, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDotsVertical, IconExplicit, IconPlayerPlayFilled } from "@tabler/icons-react";
 
@@ -22,46 +22,53 @@ export function Song({ id, title, artists, explicit }: SongProps) {
         <Flex
           align="center"
           justify="space-between"
-          p={1}
-          classNames={{ root: "rounded hover:bg-darkGray" }}>
+          p={1}>
           <Group wrap="nowrap">
             <Flex
               align="center"
               justify="center"
               h={56}
               w={56}
-              classNames={{ root: "bg-gray text-white" }}>
-              <IconPlayerPlayFilled size={24} />
+              bg="dark.6"
+              c="gray.0">
+              <IconPlayerPlayFilled
+                color="gray.0"
+                size={24}
+              />
             </Flex>
-            <Stack gap={4}>
-              <Group>
-                <Text
+            <Stack gap={0}>
+              <Group c="gray.0">
+                <Title
+                  order={4}
+                  lineClamp={2}
                   fw="bold"
-                  fz="xl"
-                  classNames={{ root: "text-white line-clamp-1" }}>
+                  c="gray.0">
                   {title}
-                </Text>
+                </Title>
                 {explicit && <IconExplicit size={20} />}
               </Group>
-              <Text classNames={{ root: "text-lightGray line-clamp-1" }}>{artists.join(", ")}</Text>
+              <Text
+                c="dark.2"
+                lineClamp={1}>
+                {artists.join(", ")}
+              </Text>
             </Stack>
           </Group>
 
           <Menu width={200}>
             <Menu.Target>
               <ActionIcon
+                variant="subtle"
                 radius="xl"
                 p={3}
-                classNames={{ root: "bg-transparent hover:bg-lightGray hover:bg-opacity-50" }}
                 onClick={(e) => e.preventDefault()}>
                 <IconDotsVertical size={24} />
               </ActionIcon>
             </Menu.Target>
 
             <Menu.Dropdown
-              classNames={{
-                dropdown: "bg-darkGray text-white"
-              }}>
+              bg="dark.8"
+              color="gray.0">
               <Menu.Item
                 onClick={(e) => {
                   e.preventDefault();
@@ -70,7 +77,7 @@ export function Song({ id, title, artists, explicit }: SongProps) {
                 Update Song
               </Menu.Item>
               <Menu.Item
-                classNames={{ item: "text-red-400 hover:bg-neutral-700" }}
+                c="red.6"
                 onClick={(e) => {
                   e.preventDefault();
                   open();

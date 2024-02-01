@@ -19,7 +19,13 @@ export function SongsSection({ items, linkUrl }: SongsSectionProps) {
       />
 
       {items.length ? (
-        <SimpleGrid cols={3}>
+        <SimpleGrid
+          cols={3}
+          styles={{
+            root: {
+              alignItems: "flex-start"
+            }
+          }}>
           {items.map((item) => (
             <Song
               key={item.id}
@@ -34,9 +40,7 @@ export function SongsSection({ items, linkUrl }: SongsSectionProps) {
         <Text
           fs="italic"
           ta="center"
-          classNames={{
-            root: "text-lightGray"
-          }}>
+          c="dark.2">
           No songs to display.
         </Text>
       )}

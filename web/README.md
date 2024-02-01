@@ -9,7 +9,6 @@ This project uses lot of stuff as:
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [NextJS](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 

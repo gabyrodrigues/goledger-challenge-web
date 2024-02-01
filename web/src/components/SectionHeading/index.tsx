@@ -20,10 +20,7 @@ export function SectionHeading({ title, linkUrl }: SectionHeadingProps) {
           component={Link}
           href={linkUrl}
           fw="bold"
-          radius="xl"
-          classNames={{
-            root: "text-primary border border-lightGray hover:bg-white hover:border-white hover:text-black"
-          }}>
+          radius="xl">
           More
         </Button>
       )}

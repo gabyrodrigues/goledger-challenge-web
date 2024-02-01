@@ -30,7 +30,7 @@ interface InfoCardProps {
     title: string;
     artist: string;
     releaseDate: string;
-    rating?: number;
+    rating: number | null;
   };
   artist?: {
     id: string;
@@ -89,7 +89,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
         return (
           <Flex
             justify="space-between"
-            classNames={{ root: "flex-1" }}>
+            flex={1}>
             <Stack gap={8}>
               <Title
                 order={1}
@@ -101,25 +101,23 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                 gap={4}
                 align="center">
                 {song?.explicit && <IconExplicit size={20} />}
-                <Text classNames={{ root: "text-lightGray" }}>Song</Text>•
-                <Text classNames={{ root: "text-lightGray" }}>{song?.artists.join(", ")}</Text> •
-                <Text classNames={{ root: "text-lightGray" }}>{song?.album}</Text>
+                <Text c="gray.0">Song</Text>•<Text c="gray.0">{song?.artists.join(", ")}</Text> •
+                <Text c="gray.0">{song?.album}</Text>
               </Group>
             </Stack>
             <Menu width={200}>
               <Menu.Target>
                 <ActionIcon
+                  variant="subtle"
                   radius="xl"
-                  p={3}
-                  classNames={{ root: "bg-transparent hover:bg-lightGray hover:bg-opacity-50" }}>
+                  p={3}>
                   <IconDotsVertical size={24} />
                 </ActionIcon>
               </Menu.Target>
 
               <Menu.Dropdown
-                classNames={{
-                  dropdown: "bg-darkGray text-white"
-                }}>
+                bg="dark.8"
+                color="gray.0">
                 <Menu.Item
                   onClick={(e) => {
                     e.preventDefault();
@@ -132,9 +130,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                     e.preventDefault();
                     open();
                   }}
-                  classNames={{
-                    item: "text-red-400 hover:bg-neutral-700"
-                  }}>
+                  c="red.6">
                   Delete Song
                 </Menu.Item>
               </Menu.Dropdown>
@@ -145,7 +141,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
         return (
           <Flex
             justify="space-between"
-            classNames={{ root: "flex-1" }}>
+            flex={1}>
             <Stack gap={8}>
               <Title
                 order={1}
@@ -156,9 +152,8 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
               <Group
                 gap={4}
                 align="center">
-                <Text classNames={{ root: "text-lightGray" }}>Album</Text>•
-                <Text classNames={{ root: "text-lightGray" }}>{album?.artist}</Text> •
-                <Text classNames={{ root: "text-lightGray" }}>
+                <Text c="gray.0">Album</Text>•<Text c="gray.0">{album?.artist}</Text> •
+                <Text c="gray.0">
                   {album?.releaseDate &&
                     new Date(album?.releaseDate).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -167,26 +162,21 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                     })}
                 </Text>
               </Group>
-              {album?.rating && (
-                <Text classNames={{ root: "text-lightGray" }}>Rating: {album?.rating}</Text>
-              )}
+              {album?.rating && <Text c="gray.0">Rating: {album?.rating}</Text>}
             </Stack>
             <Menu width={200}>
               <Menu.Target>
                 <ActionIcon
+                  variant="subtle"
                   radius="xl"
-                  p={3}
-                  classNames={{
-                    root: "bg-transparent rounded-full hover:bg-lightGray hover:bg-opacity-50"
-                  }}>
+                  p={3}>
                   <IconDotsVertical size={24} />
                 </ActionIcon>
               </Menu.Target>
 
               <Menu.Dropdown
-                classNames={{
-                  dropdown: "bg-darkGray text-white"
-                }}>
+                bg="dark.8"
+                color="gray.0">
                 <Menu.Item
                   onClick={(e) => {
                     e.preventDefault();
@@ -199,9 +189,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                     e.preventDefault();
                     open();
                   }}
-                  classNames={{
-                    item: "text-red-400 hover:bg-neutral-700"
-                  }}>
+                  c="red.6">
                   Delete Album
                 </Menu.Item>
               </Menu.Dropdown>
@@ -212,7 +200,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
         return (
           <Flex
             justify="space-between"
-            classNames={{ root: "flex-1" }}>
+            flex={1}>
             <Stack gap={8}>
               <Title
                 order={1}
@@ -220,24 +208,21 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                 c="var(--mantine-color-gray-0)">
                 {playlist?.name}
               </Title>
-              <Text classNames={{ root: "text-lightGray" }}>{playlist?.description}</Text>
+              <Text c="gray.0">{playlist?.description}</Text>
             </Stack>
             <Menu width={200}>
               <Menu.Target>
                 <ActionIcon
+                  variant="subtle"
                   radius="xl"
-                  p={3}
-                  classNames={{
-                    root: "bg-transparent rounded-full hover:bg-lightGray hover:bg-opacity-50"
-                  }}>
+                  p={3}>
                   <IconDotsVertical size={24} />
                 </ActionIcon>
               </Menu.Target>
 
               <Menu.Dropdown
-                classNames={{
-                  dropdown: "bg-darkGray text-white"
-                }}>
+                bg="dark.8"
+                color="gray.0">
                 <Menu.Item
                   onClick={(e) => {
                     e.preventDefault();
@@ -250,9 +235,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                     e.preventDefault();
                     open();
                   }}
-                  classNames={{
-                    item: "text-red-400 hover:bg-neutral-700"
-                  }}>
+                  c="red.6">
                   Delete Playlist
                 </Menu.Item>
               </Menu.Dropdown>
@@ -263,7 +246,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
         return (
           <Flex
             justify="space-between"
-            classNames={{ root: "flex-1" }}>
+            flex={1}>
             <Stack gap={8}>
               <Title
                 order={1}
@@ -271,24 +254,21 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                 c="var(--mantine-color-gray-0)">
                 {artist?.name}
               </Title>
-              <Text classNames={{ root: "text-lightGray" }}>{artist?.about}</Text>
+              <Text c="gray.0">{artist?.about}</Text>
             </Stack>
             <Menu width={200}>
               <Menu.Target>
                 <ActionIcon
+                  variant="subtle"
                   radius="xl"
-                  p={3}
-                  classNames={{
-                    root: "bg-transparent rounded-full hover:bg-lightGray hover:bg-opacity-50"
-                  }}>
+                  p={3}>
                   <IconDotsVertical size={24} />
                 </ActionIcon>
               </Menu.Target>
 
               <Menu.Dropdown
-                classNames={{
-                  dropdown: "bg-darkGray text-white"
-                }}>
+                bg="dark.8"
+                color="gray.0">
                 <Menu.Item
                   onClick={(e) => {
                     e.preventDefault();
@@ -301,9 +281,7 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
                     e.preventDefault();
                     open();
                   }}
-                  classNames={{
-                    item: "text-red-400 hover:bg-neutral-700"
-                  }}>
+                  c="red.6">
                   Delete Artist
                 </Menu.Item>
               </Menu.Dropdown>
@@ -322,13 +300,14 @@ export function InfoCard({ type, song, artist, album, playlist }: InfoCardProps)
           wrap="nowrap"
           justify="flex-start"
           gap={32}
-          w="100%">
+          flex={1}>
           <Flex
             w={160}
             h={160}
+            bg="dark.6"
+            c="gray.0"
             justify="center"
-            align="center"
-            classNames={{ root: "bg-gray text-white" }}>
+            align="center">
             {renderCardIcon()}
           </Flex>
           {renderCardInfo()}

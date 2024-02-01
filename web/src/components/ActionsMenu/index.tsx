@@ -12,18 +12,14 @@ export function ActionsMenu() {
           variant="outline"
           leftSection={<IconPlus size={24} />}
           radius="md"
-          fw="bold"
-          classNames={{
-            root: "text-primary border-lightGray hover:bg-primary hover:text-white hover:border-primary"
-          }}>
+          fw="bold">
           Create
         </Button>
       </Menu.Target>
 
       <Menu.Dropdown
-        classNames={{
-          dropdown: "bg-darkGray text-white"
-        }}>
+        bg="dark.8"
+        color="gray.0">
         <Menu.Item
           component={Link}
           href="/artists/new">

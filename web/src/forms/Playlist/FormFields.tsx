@@ -123,10 +123,7 @@ export function FormFields({
           variant="filled"
           radius="md"
           size="lg"
-          fw="bold"
-          classNames={{
-            root: "text-white bg-primary hover:bg-darkPrimary hover:text-white"
-          }}>
+          fw="bold">
           {submitRef.current?.disabled ? (
             <Loader
               size="sm"

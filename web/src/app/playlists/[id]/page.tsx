@@ -38,9 +38,7 @@ export default function PlaylistId() {
           <Text
             fs="italic"
             ta="center"
-            classNames={{
-              root: "text-lightGray"
-            }}>
+            c="dark.2">
             No songs to display. Update the playlist to add songs.
           </Text>
         )}

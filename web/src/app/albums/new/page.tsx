@@ -32,7 +32,11 @@ export default function NewAlbum() {
         </Flex>
       ) : (
         <Stack gap={32}>
-          <Title order={1}>Create New Album</Title>
+          <Title
+            order={1}
+            c="gray.0">
+            Create New Album
+          </Title>
           <AlbumForm />
         </Stack>
       )}

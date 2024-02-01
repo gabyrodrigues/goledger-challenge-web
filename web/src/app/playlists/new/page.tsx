@@ -32,7 +32,11 @@ export default function NewPlaylist() {
         </Flex>
       ) : (
         <Stack gap={32}>
-          <Title order={1}>Create New Playlist</Title>
+          <Title
+            order={1}
+            c="gray.0">
+            Create New Playlist
+          </Title>
           <PlaylistForm />
         </Stack>
       )}

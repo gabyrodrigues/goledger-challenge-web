@@ -17,8 +17,10 @@ export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
       {items.length ? (
         <SimpleGrid
           cols={6}
-          classNames={{
-            root: "items-start"
+          styles={{
+            root: {
+              alignItems: "flex-start"
+            }
           }}>
           {items.map((item) => (
             <Artist
@@ -32,9 +34,7 @@ export function ArtistsSection({ items, linkUrl }: ArtistsSectionProps) {
         <Text
           fs="italic"
           ta="center"
-          classNames={{
-            root: "text-lightGray"
-          }}>
+          c="dark.2">
           No artists to display.
         </Text>
       )}
