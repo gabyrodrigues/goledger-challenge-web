@@ -1,5 +1,5 @@
 # 📝 Music Studio Web  
-Music Studio is a streaming web interface connected to a blockchain app. Using the application developed in Next.JS, it is possible to view, edit, create and delete streaming content, such as songs, artists, albums and playlists.
+Music Studio is a streaming web interface connected to a blockchain app. Using the application developed in Next.js, it is possible to view, edit, create and delete streaming content, such as songs, artists, albums and playlists.
 
 ## 👩‍💻 Technologies
 
@@ -61,4 +61,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see Mus
 
 ## 💡 Learnings and improvements
 
+In general, the project brought a lot of lessons, especially in terms of creating components and managing all the CRUDs in cases where one piece of information depends on the existence of another. Although I believe the result has been satisfactory, it is still possible to make several improvements, such as:
 
+- Improving dependencies between CRUD functions;
+- Optimized rendering of components;
+- Refactoring the data creation functions;
