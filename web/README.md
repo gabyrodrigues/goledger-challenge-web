@@ -49,18 +49,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see Mus
  - `/songs`: Songs Page. Here you can view the lists of all songs created. You can also have access to its other actions:
    -  `/songs/:id`: You can view the information of an unique song. Such as title, album and artist.
    -  `/songs/update/:id`: You can access the form to update the song created to change its information.
+   -  `/songs/new`: You can access the form to create a new song.
    By clicking in a song component you have the option to update it or also delete it.
  - `/artists`: Artist Page. Here you can access all artists and also its other actions:
    -  `/artists/:id`: You can view the information of an unique artist. Such as their description, songs and albums in only one page.
    -  `/artists/update/:id`: You can access the form to update the artist created to change its information.
+   -  `/artists/new`: You can access the form to create a new artist.
    By clicking in an artist component you have the option to update it or also delete it.
  - `/albums`: Albums Page. Here you can view the lists of all songs created. You can also have access to its other actions:
    -  `/albums/:id`: You can view the information of an unique album. Such as title and songs of this album.
    -  `/albums/update/:id`: You can access the form to update the album.
+   -  `/albums/new`: You can access the form to create a new album.
     By clicking in an album component you have the option to update it or also delete it.
  - `/playlists`: Playlists Page. Here you can access the playlists created and also its other actions:
    -  `/playlists/:id`: You can view the clicked playlist information. Such as their description and songs.
    -  `/playlists/update/:id`: You can access the form to update the information of the created playlist.
+   -  `/playlists/new`: You can access the form to create a new playlist.
    By clicking in a playlist component you have the option to update it or also delete it.
 
 ## 💡 Learnings and improvements
