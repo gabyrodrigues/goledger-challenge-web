@@ -1,20 +1,28 @@
-![React Avançado](https://raw.githubusercontent.com/React-Avancado/boilerplate/master/public/img/logo-gh.svg)
+# 📝 Music Studio Web  
+Music Studio is a streaming web interface connected to a blockchain app. Using the application developed in Next.JS, it is possible to view, edit, create and delete streaming content, such as songs, artists, albums and playlists.
 
-This is a [Next.js](https://nextjs.org/) boilerplate to be used in a course called [React Avançado](https://reactavancado.com.br/) but using Tailwind CSS instead of Styled Components.
-![ci](https://github.com/React-Avancado/boilerplate/workflows/ci/badge.svg) [Figma](https://www.figma.com/file/5ckeYEVARTGtidz7KuhumM/Music-Streaming-App?type=design&node-id=6%3A5&mode=design&t=JOFpf6FB4qMTOKBX-1)
-
-## What is inside?
+## 👩‍💻 Technologies
 
 This project uses lot of stuff as:
 
+- [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [NextJS](https://nextjs.org/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
+- [Mantine](https://mantine.dev/)
 
-## Getting Started
+## 💻 Getting Started
 
-First, run the development server:
+First, install all the dependencies: 
+
+```bash
+npm install
+# or
+yarn 
+```
+
+And then run the development server:
 
 ```bash
 npm run dev
@@ -22,9 +30,7 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see Music Studio working.
 
 ## Commands
 
@@ -33,17 +39,26 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 - `start`: starts a simple server with the build production code
 - `lint`: runs the linter in all components and pages
 
-## Learn More
+### 💠 API Routes
 
-To learn more about Next.js, take a look at the following resources:
+ - `/`: Home Route. Here you can view the first contents of Songs, Artists, Albums and Playlist. 
+ - `/songs`: Songs Page. Here you can view the lists of all songs created. You can also have access to its other actions:
+   -  `/songs/:id`: You can view the information of an unique song. Such as title, album and artist.
+   -  `/songs/update/:id`: You can access the form to update the song created to change its information.
+   By clicking in a song component you have the option to update it or also delete it.
+ - `/artists`: Artist Page. Here you can access all artists and also its other actions:
+   -  `/artists/:id`: You can view the information of an unique artist. Such as their description, songs and albums in only one page.
+   -  `/artists/update/:id`: You can access the form to update the artist created to change its information.
+   By clicking in an artist component you have the option to update it or also delete it.
+ - `/albums`: Albums Page. Here you can view the lists of all songs created. You can also have access to its other actions:
+   -  `/albums/:id`: You can view the information of an unique album. Such as title and songs of this album.
+   -  `/albums/update/:id`: You can access the form to update the album.
+    By clicking in an album component you have the option to update it or also delete it.
+ - `/playlists`: Playlists Page. Here you can access the playlists created and also its other actions:
+   -  `/playlists/:id`: You can view the clicked playlist information. Such as their description and songs.
+   -  `/playlists/update/:id`: You can access the form to update the information of the created playlist.
+   By clicking in a playlist component you have the option to update it or also delete it.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💡 Learnings and improvements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
